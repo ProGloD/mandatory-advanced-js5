@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import Dropbox from "dropbox";
+import fetch from "isomorphic-fetch";
 
 import { token$, updateToken } from "../store/authToken";
 
 const Home = () => {
   const [userToken, updateUserToken] = useState(token$.value);
+  let dbx = new Dropbox.Dropbox({ fetch, accessToken: userToken });
 
   useEffect(() => {
     let subscription = token$.subscribe(token => {
@@ -20,12 +22,13 @@ const Home = () => {
   }, []);
 
   function getFiles(path = "") {
-    let dbx = new Dropbox.Dropbox({ accessToken: userToken });
-
     dbx
       .filesListFolder({ path })
       .then(function(response) {
+        console.log(response);
+
         let files = response.entries;
+
         console.log(files);
 
         for (let file of files) {
@@ -40,7 +43,6 @@ const Home = () => {
   }
 
   function logOut() {
-    let dbx = new Dropbox.Dropbox({ accessToken: userToken });
     dbx
       .authTokenRevoke()
       .then(_ => updateToken(null))
