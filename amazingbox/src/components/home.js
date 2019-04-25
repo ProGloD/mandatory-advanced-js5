@@ -1,12 +1,12 @@
 import React, {useState} from "react";
 import {Redirect} from "react-router-dom";
 
+import {token$, updateToken} from "../store/authToken";
+
 const Home =()=>{
-    const [auth, updateAuth] = useState(false);
+    const token = token$.value;
 
-
-
-    if (!auth){
+    if (!token){
         return <Redirect to="/auth" />
     }
 
