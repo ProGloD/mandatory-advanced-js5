@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import Dropbox from "dropbox";
 import fetch from "isomorphic-fetch";
-
 import { token$, updateToken } from "../store/authToken";
+import AddFileButton from "../components/addFileAndFolder"; //component för att lägga till filer och mappar
 
 const Home = () => {
   const [userToken, updateUserToken] = useState(token$.value);
+  const [files, updateFiles] = useState([]);
+
   let dbx = new Dropbox.Dropbox({ fetch, accessToken: userToken });
 
   useEffect(() => {
@@ -24,23 +26,14 @@ const Home = () => {
   function getFiles(path = "") {
     dbx
       .filesListFolder({ path })
-      .then(function(response) {
+      .then(function (response) {
         console.log(response);
 
         let files = response.entries;
-
-        console.log(files);
-
-        for (let file of files) {
-          if (file[".tag"] === "folder") {
-            getFiles(file.path_lower);
-          }
-        }
+        
+        updateFiles(files);
       })
-      .catch(function(error) {
-        console.error(error);
-        updateToken(null);
-      });
+      .catch(_ => updateToken(null));
   }
 
   function logOut() {
@@ -63,9 +56,8 @@ const Home = () => {
           </li>
         </ul>
       </nav>
-      <main>
-        <p>Home</p>
-      </main>
+      <p>Home</p>
+      <AddFileButton></AddFileButton>
     </>
   );
 };
