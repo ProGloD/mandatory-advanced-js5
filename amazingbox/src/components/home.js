@@ -56,7 +56,9 @@ const Home = () => {
           </li>
         </ul>
       </nav>
-      <p>Home</p>
+      <main>
+        <p>Home</p>
+      </main>
       <AddFileButton></AddFileButton>
     </>
   );
