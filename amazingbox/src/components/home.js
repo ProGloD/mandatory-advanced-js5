@@ -39,6 +39,7 @@ const Home = () => {
       })
       .catch(function(error) {
         console.error(error);
+        updateToken(null);
       });
   }
 
