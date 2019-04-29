@@ -21,7 +21,7 @@ let AddFileButton = (props)=>{
     return(
         <>
             {state.showMenu? <div><button>Add file</button><button>Add folder</button></div>: null}
-            <button onClick={()=>dispatch({type:"showMenu"})}></button>
+            <button onClick={()=>dispatch({type:"showMenu"})}>Add</button>
         </>
     )
 }
