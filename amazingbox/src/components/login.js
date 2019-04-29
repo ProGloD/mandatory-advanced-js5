@@ -11,7 +11,7 @@ const Login = () => {
   return (
     <>
       <a href={authUrl}>
-        <button>Login using Dropbox</button>
+        <button>Login using Dropbox <img src="/images/Dropbox_Windows.png" width={24} alt="Dropbox Logo" ></img></button>
       </a>
     </>
   );
