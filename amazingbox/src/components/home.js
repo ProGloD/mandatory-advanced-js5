@@ -58,7 +58,7 @@ const Home = () => {
         </ul>
       </nav>
       <p>Home</p>
-      <ItemList/>
+      <ItemList files={files}/>
     </>
   );
 };
