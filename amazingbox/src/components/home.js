@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import Dropbox from "dropbox";
 import fetch from "isomorphic-fetch";
+import ItemList from "./itemList";
 
 import { token$, updateToken } from "../store/authToken";
 
@@ -57,6 +58,7 @@ const Home = () => {
         </ul>
       </nav>
       <p>Home</p>
+      <ItemList/>
     </>
   );
 };
