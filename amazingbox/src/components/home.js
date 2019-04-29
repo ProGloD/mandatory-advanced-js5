@@ -7,6 +7,8 @@ import AddFileButton from "../components/addFileAndFolder"; //component för att
 
 const Home = () => {
   const [userToken, updateUserToken] = useState(token$.value);
+  const [files, updateFiles] = useState([]);
+
   let dbx = new Dropbox.Dropbox({ fetch, accessToken: userToken });
 
   useEffect(() => {
@@ -28,18 +30,10 @@ const Home = () => {
         console.log(response);
 
         let files = response.entries;
-
-        console.log(files);
-
-        for (let file of files) {
-          if (file[".tag"] === "folder") {
-            getFiles(file.path_lower);
-          }
-        }
+        
+        updateFiles(files);
       })
-      .catch(_ => {
-        updateToken(null);
-      });
+      .catch(_ => updateToken(null));
   }
 
   function logOut() {
