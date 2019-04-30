@@ -1,0 +1,36 @@
+.popUp{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #80808040;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popUp-content{
+    background-color: white;
+    height: 250px;
+    width: 300px;
+    border-radius: 20px;
+    position: relative;
+    box-shadow: 0 0 8px 1px grey;
+}
+
+.popUp-content-btn{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background: initial;
+    border: none;
+    font-size: 30px;
+}
+
+.popUp-content-box {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+}

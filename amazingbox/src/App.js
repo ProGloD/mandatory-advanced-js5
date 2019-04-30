@@ -16,7 +16,7 @@ function App() {
         </header>
 
         <Route exact path="/" component={Home} />
-        <Route path=":path" component={Home} />
+        <Route path="/home" component={Home} />
         <Route path="/auth" component={Login} />
         <Route path="/auth-done" component={LoginDone} />
       </div>
