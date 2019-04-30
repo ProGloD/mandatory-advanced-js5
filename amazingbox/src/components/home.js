@@ -37,7 +37,6 @@ const Home = props => {
       <main>
         <ItemList location={props.location} />
       </main>
-      <AddFileButton />
     </>
   );
 };
