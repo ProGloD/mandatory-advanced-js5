@@ -1,10 +1,49 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { Redirect } from "react-router-dom";
+import React, {useEffect, useState}from "react";
 import Dropbox from "dropbox";
+import fetch from "isomorphic-fetch";
+
 import Item from "./Item";
+import {token$, updateToken} from "../store/authToken";
 
 function ItemList(props) {
+  const [userToken, updateUserToken] = useState(token$.value);
+  const [files, updateFiles] = useState([]);
+
+  
+
+  useEffect(() => {
+    let subscription = token$.subscribe(token => {
+      updateUserToken(token);
+    });
+
+    getFiles();
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
+
+  function getFiles() {
+    const path = !props.match ? "" : props.match.params.path;
+    console.log(path);
+    
+
+    let dbx = new Dropbox.Dropbox({ fetch, accessToken: userToken });
+    dbx
+      .filesListFolder({ path })
+      .then(function (response) {
+        console.log(response);
+
+        let files = response.entries;
+        
+        updateFiles(files);
+      })
+      .catch(_ => updateToken(null));
+  }
+
+
+
+
   return (
       <div className="ItemList">
           <table>
@@ -17,7 +56,7 @@ function ItemList(props) {
               </tr>
             </thead>
             <tbody>
-              {props.files.map((file) => 
+              {files.map((file) => 
               <tr key={file.path_lower} > 
                 <Item file={file} />
               </tr>
