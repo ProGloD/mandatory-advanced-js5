@@ -1,9 +1,40 @@
-.itemMenu{
-    background-color: aqua;
-   
+.itemMenu {
+    display: flex;
+    justify-content: space-evenly;
+    position: relative;
+    top: 1px;
 }
 
 .itemMenu-button {
-    background: initial;
+    background-color: transparent;
     border: none;
+    width: 60px;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 5px;
 }
+
+.opensecond {
+    margin-right: -5px;
+}
+
+.openfirst {
+    animation: popup 0.2s ease;
+}
+
+.opensecond {
+    animation: popup 0.8s ease;
+}
+
+.openthird {
+    animation: popup 1.4s ease;
+}
+
+@keyframes popup {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+
+
+
