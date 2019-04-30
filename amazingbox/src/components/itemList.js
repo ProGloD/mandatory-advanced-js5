@@ -7,9 +7,9 @@ import Item from "./Item";
 function ItemList(props) {
   return (
       <div className="ItemList">
-          <table>
+          <table className='item-table' cellSpacing='0' cellPadding='0'>
             <thead>
-              <tr>
+            <tr className='head-row'>
                 <th>Type</th>
                 <th>Name</th>
                 <th>Last Updated</th>

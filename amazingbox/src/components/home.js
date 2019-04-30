@@ -2,11 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import Dropbox from "dropbox";
 import fetch from "isomorphic-fetch";
-<<<<<<< HEAD
 import ItemList from "./itemList";
 
-=======
->>>>>>> 5ebdaa273f78ce7de4099e9368ce3d7bd266a3fd
 import { token$, updateToken } from "../store/authToken";
 import AddFileButton from "../components/addFileAndFolder"; //component för att lägga till filer och mappar
 
