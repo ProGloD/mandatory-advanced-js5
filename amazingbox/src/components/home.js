@@ -5,7 +5,7 @@ import fetch from "isomorphic-fetch";
 import ItemList from "./itemList";
 
 import { token$, updateToken } from "../store/authToken";
-import AddFileButton from "../components/addFileAndFolder"; //component för att lägga till filer och mappar
+
 
 const Home = (props) => {
   const [userToken, updateUserToken] = useState(token$.value);
@@ -35,19 +35,11 @@ const Home = (props) => {
 
   return (
     <>
-      <nav>
-        <ul>
-          <li>
-            <button onClick={logOut}>Log out</button>
-          </li>
-        </ul>
-      </nav>
-
+      <button onClick={logOut}>Log out</button>
       <main>
         <p>Home</p>
         <ItemList location={props.location} />
       </main>
-      <AddFileButton></AddFileButton>
     </>
   );
 };

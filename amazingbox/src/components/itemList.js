@@ -3,6 +3,7 @@ import Dropbox from "dropbox";
 import fetch from "isomorphic-fetch";
 
 import Item from "./Item";
+import AddFileButton from "../components/addFileAndFolder"; //component för att lägga till filer och mappar
 import {token$, updateToken} from "../store/authToken";
 
 function ItemList(props) {
@@ -59,6 +60,7 @@ function ItemList(props) {
               )}
               </tbody>
           </table>
+            <AddFileButton updateFiles={getFiles} path={path}></AddFileButton>
       </div>
   );
 }
