@@ -35,16 +35,8 @@ const Home = () => {
 
   return (
     <>
-      <nav>
-        <ul>
-          <li>
-            <button onClick={logOut}>Log out</button>
-          </li>
-        </ul>
-      </nav>
-
+      <button className='logout-button' onClick={logOut}>Log out</button>
       <main>
-        <p>Home</p>
         <ItemList />
       </main>
       <AddFileButton></AddFileButton>

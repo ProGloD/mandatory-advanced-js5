@@ -13,14 +13,43 @@ code {
     monospace;
 }
 
+.nav-header {
+  height: 90px;
+  box-shadow: 0px -7px 35px 0px #00000063;
+  line-height: 93px;
+}
+
+.home-icon {
+  padding-left: 20px;
+  color: black;
+} 
+
+.logout-button {
+  position: absolute;
+  top: 35px;
+  right: 20px;
+  width: 100px;
+  height: 25px;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: 'Roboto', sans-serif;
+  background-image: linear-gradient(to right, #7af6d4, rgb(0, 255, 144));
+  outline: none;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  transition: .2s ease;
+  text-transform: uppercase;
+}
+
 .item-table {
   position: relative;
-  display: block;
-  width: 1000px;
+  width: 1130px;
   max-height: 455px;
   margin: 0 auto;
   margin-bottom: 65px;
-  margin-top: 10px;
+  margin-top: 30px;
   border: none;
   overflow: scroll;
   box-shadow: -2px 26px 39px 0px #0000001a;
@@ -38,10 +67,14 @@ code {
 }
 
 .th-type, .th-name, .th-lastUpdate, .th-size {
-  font-family: 'Lobster', cursive;
-  width: 233px;
+  width: 170px;
   font-size: 20px;
-  font-weight: 100;
+  font-weight: 700;
+}
+
+.th-name {
+  position: relative;
+  left: -50px;
 }
 
 tbody {
@@ -53,26 +86,41 @@ tbody {
 }
 
 .file-row {
-  height: 45px;
+  height: 50px;
 }
 
-.td-type {
-  width: 270px;
+.td-type.material-icons {
+  margin-left: 72px;
+  margin-top: 12px;
 }
 
 .td-name {
-  width: 270px;
+  width: 315px;
+  text-overflow: ellipsis;
 }
 
 .td-lastUpdate {
+  position: relative;
   display: flex;
   justify-content: left;
-  margin-left: 64px;
-  margin-top: 13px;
+  margin-left: 30px;
+  top: 10px;
+  width: 160px;
 }
 
 .td-size {
-  width: 300px;
+  padding-left: 60px;
 }
+
+.td-menuButton {
+  padding-right: 5px;
+  margin-top: 6px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+
+
+
 
 

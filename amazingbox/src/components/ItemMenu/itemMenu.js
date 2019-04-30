@@ -52,9 +52,9 @@ function ItemMenu() {
     
     return(
         <div className="itemMenu">
-            <button className="itemMenu-button" id="rename" onClick={rename}>Rename</button>
-            <button className="itemMenu-button" id="move" onClick={move}>Move</button>
-            <button className="itemMenu-button" id="remove" onClick={remove}>Remove</button>
+            <button className="itemMenu-button openfirst" id="rename" onClick={rename}>Rename</button>
+            <button className="itemMenu-button opensecond" id="move" onClick={move}>Move</button>
+            <button className="itemMenu-button openthird" id="remove" onClick={remove}>Remove</button>
         </div>
     )
 }
