@@ -1,6 +1,7 @@
 import React, {useEffect, useState}from "react";
 import Dropbox from "dropbox";
 import fetch from "isomorphic-fetch";
+import ShowPop from "../components/ItemMenu/menuPopUp";
 
 import Item from "./Item";
 import {token$, updateToken} from "../store/authToken";
@@ -28,10 +29,8 @@ function ItemList(props) {
     dbx
       .filesListFolder({ path })
       .then(function (response) {
-        console.log(response);
 
         let files = response.entries;
-        
         updateFiles(files);
       })
       .catch(_ => updateToken(null));

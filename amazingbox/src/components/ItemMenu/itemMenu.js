@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import "./itemMenu.css";
 import ShowPop from "./menuPopUp"
 
-function ItemMenu(props) {
+function ItemMenu(props) {    
     
     const [id, upDateId] = useState('');
     const [showPop, updateShowPop] = useState(false);
@@ -19,7 +19,7 @@ function ItemMenu(props) {
                 <button onClick={onClick} className="itemMenu-button opensecond" id="move" >Move</button>
                 <button onClick={onClick} className="itemMenu-button openthird" id="remove" >Remove</button>
             </div>
-            {showPop ? <ShowPop name={props.name} showState={updateShowPop} className="showPop" sendId={id} /> : null}
+            {showPop ? <ShowPop list={props.list} name={props.name} showState={updateShowPop} className="showPop" sendId={id} /> : null}
         </div>
 
     )  

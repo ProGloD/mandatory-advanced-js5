@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import "./App.css";
 import Login from "./components/login";
 import Home from "./components/home";
 import LoginDone from "./components/loginDone";
+import "../src/components/ItemMenu/menuPopUp.css";
 
 function App() {
   return (
