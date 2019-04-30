@@ -3,7 +3,6 @@ import { Redirect, Route } from "react-router-dom";
 import Dropbox from "dropbox";
 import fetch from "isomorphic-fetch";
 import ItemList from "./itemList";
-
 import { token$, updateToken } from "../store/authToken";
 import AddFileButton from "../components/addFileAndFolder"; //component för att lägga till filer och mappar
 
@@ -37,12 +36,7 @@ const Home = (props) => {
     <>
       <button className='logout-button' onClick={logOut}>Log out</button>
       <main>
-<<<<<<< HEAD
-        <ItemList />
-=======
-        <p>Home</p>
         <ItemList location={props.location} />
->>>>>>> fb5bcb4e849554621a17806a7533cdab7e3c0dae
       </main>
       <AddFileButton></AddFileButton>
     </>
