@@ -1,19 +1,15 @@
+<<<<<<< HEAD
 import React,{ useState} from "react";
 import ItemMenu from "../components/ItemMenu/itemMenu";
+=======
+import React from "react";
+import { Link } from "react-router-dom";
+>>>>>>> e59f383e986adce512429464102e36ba371070d1
 
-function getTime(timestamp) {
-    return new Date(timestamp).toLocaleString('sv-SE');
-}
-
-function bytesToSize(bytes) {
-    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB']
-    if (bytes === 0) return 'n/a'
-    const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)), 10)
-    if (i === 0) return `${bytes} ${sizes[i]}`
-    return `${(bytes / (1024 ** i)).toFixed(1)} ${sizes[i]}`
-}
+import {getTime, bytesToSize} from "../utils";
 
 function Item(props) {
+<<<<<<< HEAD
     const [showMenu, updateShowMenu] = useState(false);
 
     return (
@@ -24,6 +20,18 @@ function Item(props) {
             <td>{bytesToSize(props.file.size)}</td>
             <td><button onClick={()=>!showMenu? updateShowMenu(true) : updateShowMenu(false)} className="material-icons">more_horiz</button></td>
             <td>{showMenu? <ItemMenu></ItemMenu> : null}</td>
+=======
+    const file = props.file;
+    const type = file[".tag"];
+
+    return (
+        <> 
+            <td className="material-icons">{type === "folder" ? "folder" : "insert_drive_file"}</td>
+            <td>{type === "folder" ? <Link to={`${file.path_display}`}>{file.name}</Link> : file.name}</td>
+            <td>{type !== "folder" ? getTime(file.server_modified) : null}</td>
+            <td>{type !== "folder" ? bytesToSize(file.size) : null}</td>
+            <td><button className="material-icons">more_horiz</button></td>
+>>>>>>> e59f383e986adce512429464102e36ba371070d1
         </>
     );
 }
