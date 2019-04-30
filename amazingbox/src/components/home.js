@@ -7,7 +7,7 @@ import ItemList from "./itemList";
 import { token$, updateToken } from "../store/authToken";
 import AddFileButton from "../components/addFileAndFolder"; //component för att lägga till filer och mappar
 
-const Home = () => {
+const Home = (props) => {
   const [userToken, updateUserToken] = useState(token$.value);
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const Home = () => {
 
       <main>
         <p>Home</p>
-        <ItemList />
+        <ItemList location={props.location} />
       </main>
       <AddFileButton></AddFileButton>
     </>

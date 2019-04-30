@@ -9,7 +9,7 @@ function ItemList(props) {
   const [userToken, updateUserToken] = useState(token$.value);
   const [files, updateFiles] = useState([]);
 
-  
+  const path = props.location.pathname === "/" ? "" : props.location.pathname.slice(5) ;
 
   useEffect(() => {
     let subscription = token$.subscribe(token => {
@@ -21,13 +21,9 @@ function ItemList(props) {
     return () => {
       subscription.unsubscribe();
     };
-  }, []);
+  }, [props.location.pathname]);
 
   function getFiles() {
-    const path = !props.match ? "" : props.match.params.path;
-    console.log(path);
-    
-
     let dbx = new Dropbox.Dropbox({ fetch, accessToken: userToken });
     dbx
       .filesListFolder({ path })
