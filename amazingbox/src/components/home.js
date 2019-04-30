@@ -4,10 +4,6 @@ import Dropbox from "dropbox";
 import fetch from "isomorphic-fetch";
 import ItemList from "./itemList";
 
-<<<<<<< HEAD
-
-=======
->>>>>>> e59f383e986adce512429464102e36ba371070d1
 import { token$, updateToken } from "../store/authToken";
 import AddFileButton from "../components/addFileAndFolder"; //component för att lägga till filer och mappar
 
