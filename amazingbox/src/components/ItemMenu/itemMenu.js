@@ -1,25 +1,62 @@
-import React from "react";
-import PopUp from "./menuPopUp";
+import React, {setState} from "react";
+import "./itemMenu.css";
 
-function itemMenu() {
+function ItemMenu() {
     
-    function rename(e) {
-        <PopUp clickedBtn={e} />
+    function rename(e) {   
+        console.log('rename');
+             
+        return (
+            <div className="popup">
+                <div className="popup-container">
+                    <button className="popup-container-closeBtn">&times;</button>
+                    <form>
+                        <input placeholder="New name"></input>
+                        <button>Ok!</button>
+                    </form>
+                </div>
+            </div>
+        )
+        
     }
     function move(e) {
-        <PopUp clickedBtn={e}/>
+        console.log('move');
+        
+        return (
+            <div className="popup">
+                <div className="popup-container">
+                    <button className="popup-container-closeBtn">&times;</button>
+                    <div>
+
+                    </div>
+                </div>
+            </div>
+        )
+        
     }
     function remove(e) {
-        <PopUp clickedBtn={e}/>
+        console.log('remove');
+        
+        return (
+            <div className="popup">
+                <div className="popup-container">
+                    <button className="popup-container-closeBtn">&times;</button>
+                    <div>
+
+                    </div>
+                </div>
+            </div>
+        )
+        
     }
     
     return(
-        <div>
-            <button key="rename" onClick={rename}>Rename</button>
-            <button key="move" onClick={move}>Move</button>
-            <button key="remove" onClick={remove}>Remove</button>
+        <div className="itemMenu">
+            <button className="itemMenu-button" id="rename" onClick={rename}>Rename</button>
+            <button className="itemMenu-button" id="move" onClick={move}>Move</button>
+            <button className="itemMenu-button" id="remove" onClick={remove}>Remove</button>
         </div>
     )
 }
 
-export default itemMenu;
+export default ItemMenu;

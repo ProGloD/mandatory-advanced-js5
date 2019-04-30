@@ -1,8 +1,8 @@
-import react from "react";
+import React from "react";
 
 let PopUp = (props) => {
     let content = () => {
-        if(props.key === rename){
+        if(props.key === "rename"){
             return(
                 <p>hej</p>
             )   

@@ -1,9 +1,11 @@
-import React from "react";
+import React,{ useState} from "react";
+import ItemMenu from "../components/ItemMenu/itemMenu";
 import { Link } from "react-router-dom";
 
 import {getTime, bytesToSize} from "../utils";
 
 function Item(props) {
+    const [showMenu, updateShowMenu] = useState(false);
     const file = props.file;
     const type = file[".tag"];
 
@@ -13,7 +15,8 @@ function Item(props) {
             <td className='td-name'>{type === "folder" ? <Link to={`${file.path_display}`}>{file.name}</Link> : file.name}</td>
             <td className='td-lastUpdate'>{type !== "folder" ? getTime(file.server_modified) : null}</td>
             <td className='td-size'>{type !== "folder" ? bytesToSize(file.size) : null}</td>
-            <td className='td-menu'><button className="material-icons">more_horiz</button></td>
+            <td className='td-menu'><button onClick={()=>!showMenu? updateShowMenu(true) : updateShowMenu(false)} className="material-icons">more_horiz</button></td>
+            <td>{showMenu? <ItemMenu></ItemMenu> : null}</td>
         </>
     );
 }
