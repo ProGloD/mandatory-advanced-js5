@@ -1,16 +1,20 @@
-import React, {useEffect, useState}from "react";
+import React, { useEffect, useState } from "react";
 import Dropbox from "dropbox";
 import fetch from "isomorphic-fetch";
 import ShowPop from "../components/ItemMenu/menuPopUp";
 
 import Item from "./Item";
+import AddFileButton from "../components/addFileAndFolder"; //component för att lägga till filer och mappar
 import {token$, updateToken} from "../store/authToken";
+import Path from "./Path";
+
 
 function ItemList(props) {
   const [userToken, updateUserToken] = useState(token$.value);
   const [files, updateFiles] = useState([]);
 
-  const path = props.location.pathname === "/" ? "" : props.location.pathname.slice(5) ;
+  const path =
+    props.location.pathname === "/" ? "" : props.location.pathname.slice(5);
 
   useEffect(() => {
     let subscription = token$.subscribe(token => {
@@ -36,9 +40,6 @@ function ItemList(props) {
       .catch(_ => updateToken(null));
   }
 
-
-
-
   return (
       <div className="ItemList">
           <table className='item-table' cellSpacing='0' cellPadding='0'>
@@ -58,6 +59,7 @@ function ItemList(props) {
               )}
               </tbody>
           </table>
+            <AddFileButton updateFiles={getFiles} path={path}></AddFileButton>
       </div>
   );
 }
