@@ -8,6 +8,7 @@
 .itemMenu-button {
     background-color: transparent;
     border: none;
+    outline: none;
     width: 60px;
     font-size: 14px;
     font-weight: 600;
