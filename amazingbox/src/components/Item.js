@@ -6,6 +6,8 @@ import {getTime, bytesToSize} from "../utils";
 
 function Item(props) {
     const [showMenu, updateShowMenu] = useState(false);
+    const file = props.file;
+    const type = file[".tag"];
 
     return (
         <>
