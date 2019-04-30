@@ -1,4 +1,5 @@
-import React from "react";
+import React,{ useState} from "react";
+import ItemMenu from "../components/ItemMenu/itemMenu";
 
 function getTime(timestamp) {
     return new Date(timestamp).toLocaleString('sv-SE');
@@ -13,13 +14,16 @@ function bytesToSize(bytes) {
 }
 
 function Item(props) {
+    const [showMenu, updateShowMenu] = useState(false);
+
     return (
         <>
             {props.file[".tag"] === "folder" ? <td className="material-icons">folder</td> : <td className="material-icons">insert_drive_file</td>}
             <td>{props.file.name}</td>
             <td>{getTime(props.file.server_modified)}</td>
             <td>{bytesToSize(props.file.size)}</td>
-            <td><button className="material-icons">more_horiz</button></td>
+            <td><button onClick={()=>!showMenu? updateShowMenu(true) : updateShowMenu(false)} className="material-icons">more_horiz</button></td>
+            <td>{showMenu? <ItemMenu></ItemMenu> : null}</td>
         </>
     );
 }
