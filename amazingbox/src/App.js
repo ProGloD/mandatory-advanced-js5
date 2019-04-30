@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-
 import "./App.css";
 import Login from "./components/login";
 import Home from "./components/home";
@@ -10,15 +9,11 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <nav>
-          <ul>
-            <li>
-              <Link className="material-icons" to="/">
-                home
-              </Link>
-            </li>
-          </ul>
-        </nav>
+        <header className="nav-header">
+            <Link className="home-icon material-icons" to="/">
+              home
+            </Link>
+        </header>
 
         <Route exact path="/" component={Home} />
         <Route path="/home" component={Home} />

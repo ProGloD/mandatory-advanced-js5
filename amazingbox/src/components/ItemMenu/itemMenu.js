@@ -1,62 +1,28 @@
-import React, {setState} from "react";
+import React, {useState} from "react";
 import "./itemMenu.css";
+import ShowPop from "./menuPopUp"
 
-function ItemMenu() {
+function ItemMenu(props) {
     
-    function rename(e) {   
-        console.log('rename');
-             
-        return (
-            <div className="popup">
-                <div className="popup-container">
-                    <button className="popup-container-closeBtn">&times;</button>
-                    <form>
-                        <input placeholder="New name"></input>
-                        <button>Ok!</button>
-                    </form>
-                </div>
-            </div>
-        )
-        
-    }
-    function move(e) {
-        console.log('move');
-        
-        return (
-            <div className="popup">
-                <div className="popup-container">
-                    <button className="popup-container-closeBtn">&times;</button>
-                    <div>
-
-                    </div>
-                </div>
-            </div>
-        )
-        
-    }
-    function remove(e) {
-        console.log('remove');
-        
-        return (
-            <div className="popup">
-                <div className="popup-container">
-                    <button className="popup-container-closeBtn">&times;</button>
-                    <div>
-
-                    </div>
-                </div>
-            </div>
-        )
-        
-    }
+    const [id, upDateId] = useState('');
+    const [showPop, updateShowPop] = useState(false);
     
+    function onClick(e) {
+        upDateId(e.target.id);
+        !showPop ? updateShowPop(true) : updateShowPop(false)        
+    }
+
     return(
-        <div className="itemMenu">
-            <button className="itemMenu-button" id="rename" onClick={rename}>Rename</button>
-            <button className="itemMenu-button" id="move" onClick={move}>Move</button>
-            <button className="itemMenu-button" id="remove" onClick={remove}>Remove</button>
+        <div>
+            <div className="itemMenu">
+                <button onClick={onClick} className="itemMenu-button openfirst" id="rename" >Rename</button>
+                <button onClick={onClick} className="itemMenu-button opensecond" id="move" >Move</button>
+                <button onClick={onClick} className="itemMenu-button openthird" id="remove" >Remove</button>
+            </div>
+            {showPop ? <ShowPop name={props.name} showState={updateShowPop} className="showPop" sendId={id} /> : null}
         </div>
-    )
+
+    )  
 }
 
 export default ItemMenu;

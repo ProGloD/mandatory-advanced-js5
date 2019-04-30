@@ -3,7 +3,6 @@ import { Redirect, Route } from "react-router-dom";
 import Dropbox from "dropbox";
 import fetch from "isomorphic-fetch";
 import ItemList from "./itemList";
-
 import { token$, updateToken } from "../store/authToken";
 
 
@@ -35,9 +34,8 @@ const Home = (props) => {
 
   return (
     <>
-      <button onClick={logOut}>Log out</button>
+      <button className='logout-button' onClick={logOut}>Log out</button>
       <main>
-        <p>Home</p>
         <ItemList location={props.location} />
       </main>
     </>

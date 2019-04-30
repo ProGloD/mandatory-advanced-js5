@@ -43,18 +43,18 @@ function ItemList(props) {
 
   return (
       <div className="ItemList">
-          <table>
+          <table className='item-table' cellSpacing='0' cellPadding='0'>
             <thead>
-              <tr>
-                <th>Type</th>
-                <th>Name</th>
-                <th>Last Updated</th>
-                <th>Size</th>
+            <tr className='head-row'>
+                <th className='th-type'>Type</th>
+                <th className='th-name'>Name</th>
+                <th className='th-lastUpdate'>Last Updated</th>
+                <th className='th-size'>Size</th>
               </tr>
             </thead>
             <tbody>
               {files.map((file) => 
-              <tr key={file.path_lower} > 
+              <tr className='file-row' key={file.path_lower} > 
                 <Item file={file} />
               </tr>
               )}

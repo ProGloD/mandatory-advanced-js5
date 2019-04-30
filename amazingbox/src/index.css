@@ -12,3 +12,115 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.nav-header {
+  height: 90px;
+  box-shadow: 0px -7px 35px 0px #00000063;
+  line-height: 93px;
+}
+
+.home-icon {
+  padding-left: 20px;
+  color: black;
+} 
+
+.logout-button {
+  position: absolute;
+  top: 35px;
+  right: 20px;
+  width: 100px;
+  height: 25px;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: 'Roboto', sans-serif;
+  background-image: linear-gradient(to right, #7af6d4, rgb(0, 255, 144));
+  outline: none;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  transition: .2s ease;
+  text-transform: uppercase;
+}
+
+.item-table {
+  position: relative;
+  width: 1130px;
+  max-height: 455px;
+  margin: 0 auto;
+  margin-bottom: 65px;
+  margin-top: 30px;
+  border: none;
+  overflow: scroll;
+  box-shadow: -2px 26px 39px 0px #0000001a;
+}
+
+.thead {
+  display: block;
+  margin-top: 45px;
+}
+
+.head-row {
+  width: 1000px;
+  height: 50px;
+  top: 176px;
+}
+
+.th-type, .th-name, .th-lastUpdate, .th-size {
+  width: 170px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.th-name {
+  position: relative;
+  left: -50px;
+}
+
+tbody {
+  box-shadow: 0px 16px 27px 0px #0000002b;
+}
+
+.file-row:nth-child(odd) {
+  background-color: #88e2972b;
+}
+
+.file-row {
+  height: 50px;
+}
+
+.td-type.material-icons {
+  margin-left: 72px;
+  margin-top: 12px;
+}
+
+.td-name {
+  width: 315px;
+  text-overflow: ellipsis;
+}
+
+.td-lastUpdate {
+  position: relative;
+  display: flex;
+  justify-content: left;
+  margin-left: 30px;
+  top: 10px;
+  width: 160px;
+}
+
+.td-size {
+  padding-left: 60px;
+}
+
+.td-menuButton {
+  padding-right: 5px;
+  margin-top: 6px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+
+
+
+
+
