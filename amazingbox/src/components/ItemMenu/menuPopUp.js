@@ -2,6 +2,9 @@ import React, {useState} from "react";
 import "./menuPopUp.css";
 
 let PopUp = (props) => {
+    console.log(props.name);
+    console.log(props.list);
+    
     const [name, updateName] = useState(props.name); 
     let itemName = props.name; 
     
@@ -11,7 +14,18 @@ let PopUp = (props) => {
 
     function rename(e){
         updateName(e.target.value);
+        console.log(name);
+        
+    }
 
+    function move(){
+        console.log('move');
+        
+    }
+
+    function remove() {
+        console.log('remove');
+        
     }
     
         if(props.sendId === "rename"){
@@ -36,9 +50,10 @@ let PopUp = (props) => {
                     <div className="popUp-content-box">
                         <p>Select where to move item</p>
                         <select>
-                            <option>hej</option>
+                            <option>{props.name}</option>
                             <option>då</option>
                         </select>
+                        <button onClick={move}>Move</button>
                     </div>
                 </div>
             </div>
@@ -49,9 +64,9 @@ let PopUp = (props) => {
                 <div className="popUp-content">
                     <button onClick={closePop} className="popUp-content-btn">&times;</button>
                     <div className="popUp-content-box">
-                        <p>Are U sure U wanna remove this item?</p>
-                        <button>Yes</button>
-                        <button>Cancel</button>
+                        <p>Are you sure you wanna remove this item?</p>
+                        <button onClick={remove}>Yes</button>
+                        <button onClick={closePop}>Cancel</button>
                     </div>
                 </div>
             </div>
