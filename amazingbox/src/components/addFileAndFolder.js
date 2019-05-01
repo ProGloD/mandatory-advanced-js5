@@ -19,11 +19,11 @@ function reducer(state, action){
 
 
 let AddFileButton = (props)=>{
-    const [state, dispatch] = useReducer(reducer, {showMenu: false,});
+    const [state, dispatch] = useReducer(reducer, {showMenu: false, showCreateFolder: false});
     const [userToken, updateUserToken] = useState(token$.value);
 
 
-    function onFileChange(e){
+    function onFileChange(e){ //flytta till reducer
         console.log(props.path);
         console.log(e.target.files);
 
@@ -38,20 +38,38 @@ let AddFileButton = (props)=>{
 
             dbx
             .filesUpload({path: `${props.path}/${file.name}`, contents: file})
-                .then((respons)=>{
-                    console.log(respons);
+                .then((response)=>{
+                    console.log(response);
                     props.updateFiles();
                 }) 
         }
     }
 
-    function createFolder(){
-        
+    function createFolder(){ //flytta till reducer
+        let dbx = new Dropbox.Dropbox({ fetch, accessToken: userToken });
+        dbx
+        .filesCreateFolder({path: `${props.path}/${/*folder name*/}`})
+            .then((response)=>{
+                console.log(response);
+                props.updateFiles();
+            })
+
     }
 
     return(
         <div>
-            {state.showMenu? <div><input type="file" multiple onChange={onFileChange}></input><button>Add folder</button></div>: null}
+            {state.showCreateFolder? 
+            <div className="modal__shadow">
+                <div className="modal__shadow__container">
+                    <input type="text" onChange={dispatch({type: "input_change", value: e.target.value})} required></input>
+                    <span className="modal__shadow__container__buttonBox">
+                        <button className="modal__shadow__container__buttonBox__button" onClick={dispatch({type: "create_folder"})}>Create</button>
+                        <button className="modal__shadow__container__buttonBox__button" onClick={dispatch({type: "cancle_folder"})}>Cancle</button>
+                    </span>
+                </div>
+            </div> : null}
+
+            {state.showMenu? <div><input type="file" multiple onChange={onFileChange}></input><button>Create folder</button></div>: null}
             <button onClick={()=>dispatch({type:"showMenu"})}>Add</button>
         </div>
     )

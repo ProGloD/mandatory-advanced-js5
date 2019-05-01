@@ -28,6 +28,7 @@ function ItemList(props) {
   }, [props.location.pathname]);
 
   function getFiles() {
+    console.log("test")
     let dbx = new Dropbox.Dropbox({ fetch, accessToken: userToken });
     dbx
       .filesListFolder({ path })

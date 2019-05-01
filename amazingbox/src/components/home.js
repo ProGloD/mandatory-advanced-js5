@@ -30,7 +30,7 @@ const Home = props => {
   if (!userToken) {
     return <Redirect to="/auth" />;
   }
-
+  
   return (
     <>
       <button className='logout-button' onClick={logOut}>Log out</button>
