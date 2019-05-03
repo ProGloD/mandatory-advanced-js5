@@ -71,6 +71,18 @@ let PopUp = (props) => {
                 </div>
             </div>
             ) 
+        }else if(props.sendId === "copy"){
+            return(
+                <div className="popUp">
+                <div className="popUp-content">
+                    <button onClick={closePop} className="popUp-content-btn">&times;</button>
+                    <div className="popUp-content-box">
+                        <p>Are you sure you wanna Copy this item?</p>
+
+                    </div>
+                </div>
+            </div>
+            )
         }
     }
 

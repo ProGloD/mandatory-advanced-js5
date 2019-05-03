@@ -18,6 +18,8 @@ function ItemMenu(props) {
                 <button onClick={onClick} className="itemMenu-button openfirst" id="rename" >Rename</button>
                 <button onClick={onClick} className="itemMenu-button opensecond" id="move" >Move</button>
                 <button onClick={onClick} className="itemMenu-button openthird" id="remove" >Remove</button>
+                <button onClick={onClick} className="itemMenu-button openthird" id="copy" >Copy</button>
+
             </div>
             {showPop ? <ShowPop list={props.list} name={props.name} showState={updateShowPop} className="showPop" sendId={id} /> : null}
         </div>
