@@ -3,52 +3,42 @@ import Dropbox from "dropbox";
 import fetch from "isomorphic-fetch";
 import { token$, updateToken } from "../store/authToken";
 
-
-
 function reducer(state, action){
     switch(action.type){
-        case "showMenu":
+        case "showMenu": //toggle addMenu
         return{
             ...state,
-            showMenu: !state.showMenu? state.showMenu = true : state.showMenu = false,
-            showCreateFolder: state.showMenu = false,
+            showMenu: !state.showMenu? true : false,
+            showCreateFolder: false,
+            inputValue: ""
         };
 
-        case "show_create_folder":
+        case "show_create_folder": //show input for adding folder
             console.log(state);
         return{
             ...state,
-            showCreateFolder: state.showCreateFolder = true,
+            showCreateFolder: true,
         }
 
-        case "cancle_folder":
+        case "cancle_folder": //cancle input for foler 
         return{
             ...state,
-            showCreateFolder: state.showCreateFolder = false,
+            showCreateFolder: false,
+            inputValue: ""
         }
     }
 }
 
 
-
 let AddFileButton = (props)=>{
     const [state, dispatch] = useReducer(reducer, {showMenu: false, showCreateFolder: false, inputValue: ""});
     const [userToken, updateUserToken] = useState(token$.value); 
-
+    
+    let dbx = new Dropbox.Dropbox({ fetch, accessToken: userToken });
 
     function onFileChange(e){ //flytta till reducer
-        console.log(props.path);
-        console.log(e.target.files);
-
         let array = Array.from(e.target.files)
-        
-        
-        let dbx = new Dropbox.Dropbox({ fetch, accessToken: userToken });
-
-
         for(let file of array){
-            console.log(props.path, file);
-
             dbx
             .filesUpload({path: `${props.path}/${file.name}`, contents: file})
                 .then((response)=>{
@@ -59,14 +49,12 @@ let AddFileButton = (props)=>{
     }
 
     function createFolder(){ //flytta till reducer, får fel i reducer, kolla med andreas
-        let dbx = new Dropbox.Dropbox({ fetch, accessToken: userToken });
         dbx
         .filesCreateFolder({path: `${props.path}/${state.inputValue}`}) //add folder name 
             .then((response)=>{
                 console.log(response);
                 props.updateFiles();
             })
-
     }
 
     return(
