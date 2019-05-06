@@ -55,7 +55,7 @@ function ItemList(props) {
             <tbody>
               {files.map((file) => 
               <tr className='file-row' key={file.path_lower} > 
-                <Item file={file} />
+                <Item file={file} path={path} />
               </tr>
               )}
               </tbody>
