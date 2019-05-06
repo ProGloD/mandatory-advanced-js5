@@ -3,7 +3,6 @@ import { Redirect, Route } from "react-router-dom";
 import Dropbox from "dropbox";
 import fetch from "isomorphic-fetch";
 import ItemList from "./itemList";
-
 import { token$, updateToken } from "../store/authToken";
 import AddFileButton from "../components/addFileAndFolder"; //component för att lägga till filer och mappar
 

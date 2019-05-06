@@ -14,6 +14,7 @@ code {
 }
 
 .nav-header {
+  min-width: 1150px;
   height: 90px;
   box-shadow: 0px -7px 35px 0px #00000063;
   line-height: 93px;
@@ -25,7 +26,7 @@ code {
 } 
 
 .logout-button {
-  position: absolute;
+  position: fixed;
   top: 35px;
   right: 20px;
   width: 100px;
@@ -41,6 +42,41 @@ code {
   color: #fff;
   transition: .2s ease;
   text-transform: uppercase;
+}
+
+.add-menuContainer {
+  position: fixed;
+  left: 100px;
+  top: 24px;
+}
+
+.add-icon {
+  font-size: 37px;
+  border: none;
+  outline: none;
+}
+
+.add-popupMenu {
+  position: fixed;
+  flex-direction: row;
+  left: 150px;
+  top: 31px;
+}
+
+.add-fileButton, .add-folderButton {
+  border: none;
+  outline: none;
+  font-size: 22px;
+  text-align: left;
+}
+
+.add-fileButton {
+  margin-bottom: 10px;
+}
+
+.add-folderButton {
+  position: fixed;
+  top: 32px;
 }
 
 .item-table {

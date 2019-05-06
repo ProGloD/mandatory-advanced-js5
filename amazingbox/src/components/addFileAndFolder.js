@@ -19,10 +19,10 @@ let AddFileButton = (props)=>{
 
 
     return(
-        <>
-            {state.showMenu? <div><button>Add file</button><button>Add folder</button></div>: null}
-            <button onClick={()=>dispatch({type:"showMenu"})}>Add</button>
-        </>
+        <div className='add-menuContainer'>
+            {state.showMenu? <div className='add-popupMenu'><button className='add-fileButton material-icons'>note_add</button><button className='add-folderButton material-icons'>create_new_folder</button></div>: null}
+            <button className="add-icon material-icons" onClick={()=>dispatch({type:"showMenu"})}>add_circle_outline</button>
+        </div>
     )
 }
 export default AddFileButton;
