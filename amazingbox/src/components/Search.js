@@ -18,19 +18,23 @@ function Search(props) {
   function search(event) {
     event.preventDefault();
 
-    /*
     let dbx = new Dropbox.Dropbox({ fetch, accessToken: token$.value });
     dbx.filesSearch({ path: "", query }).then(response => {
-      console.log(response);
+      const result = [];
+
+      response.matches.map(element => result.push(element.metadata));
+      console.log(result);
+      props.updateFiles(result);
     });
-    */
   }
 
   return (
-    <form onSubmit={search}>
-      <input onChange={handleChange} placeholder="Search" value={query} />
+    <div>
+      <form onSubmit={search}>
+        <input onChange={handleChange} placeholder="Search" value={query} />
+      </form>
       <button onClick={cleanQuery}>&times;</button>
-    </form>
+    </div>
   );
 }
 
