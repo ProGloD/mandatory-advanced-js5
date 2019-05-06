@@ -89,6 +89,19 @@ code {
   cursor: pointer;
 }
 
+.path-list {
+  margin-bottom: -20px;
+  margin-top: 30px;
+  margin-left: 23px;
+}
+
+.path-list > a {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 17px;
+  color: #000;
+}
+
 .item-table {
   position: relative;
   width: 1130px;
