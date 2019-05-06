@@ -97,9 +97,12 @@ code {
 
 .path-list > a {
   text-decoration: none;
-  text-transform: uppercase;
   font-size: 17px;
   color: #000;
+}
+
+.path-list > a:first-child {
+  text-transform: uppercase;
 }
 
 .item-table {
