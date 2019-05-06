@@ -5,9 +5,8 @@ import ShowPop from "../components/ItemMenu/menuPopUp";
 
 import Item from "./Item";
 import AddFileButton from "../components/addFileAndFolder"; //component för att lägga till filer och mappar
-import {token$, updateToken} from "../store/authToken";
+import { token$, updateToken } from "../store/authToken";
 import Path from "./Path";
-
 
 function ItemList(props) {
   const [userToken, updateUserToken] = useState(token$.value);
@@ -29,12 +28,11 @@ function ItemList(props) {
   }, [props.location.pathname]);
 
   function getFiles() {
-    console.log("test")
+    console.log("test");
     let dbx = new Dropbox.Dropbox({ fetch, accessToken: userToken });
     dbx
       .filesListFolder({ path })
-      .then(function (response) {
-
+      .then(function(response) {
         let files = response.entries;
         updateFiles(files);
       })
@@ -42,26 +40,27 @@ function ItemList(props) {
   }
 
   return (
-      <div className="ItemList">
-          <table className='item-table' cellSpacing='0' cellPadding='0'>
-            <thead>
-            <tr className='head-row'>
-                <th className='th-type'>Type</th>
-                <th className='th-name'>Name</th>
-                <th className='th-lastUpdate'>Last Updated</th>
-                <th className='th-size'>Size</th>
-              </tr>
-            </thead>
-            <tbody>
-              {files.map((file) => 
-              <tr className='file-row' key={file.path_lower} > 
-                <Item file={file} />
-              </tr>
-              )}
-              </tbody>
-          </table>
-            <AddFileButton updateFiles={getFiles} path={path}></AddFileButton>
-      </div>
+    <div className="ItemList">
+      <Path path={path} />
+      <table className="item-table" cellSpacing="0" cellPadding="0">
+        <thead>
+          <tr className="head-row">
+            <th className="th-type">Type</th>
+            <th className="th-name">Name</th>
+            <th className="th-lastUpdate">Last Updated</th>
+            <th className="th-size">Size</th>
+          </tr>
+        </thead>
+        <tbody>
+          {files.map(file => (
+            <tr className="file-row" key={file.path_lower}>
+              <Item file={file} />
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <AddFileButton updateFiles={getFiles} path={path} />
+    </div>
   );
 }
 
