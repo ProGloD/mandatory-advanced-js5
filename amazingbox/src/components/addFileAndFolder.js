@@ -20,7 +20,7 @@ function reducer(state, action){
             showCreateFolder: true,
         }
 
-        case "cancle_folder": //cancle input for foler 
+        case "cancel_folder": //cancle input for foler 
         return{
             ...state,
             showCreateFolder: false,
@@ -58,20 +58,20 @@ let AddFileButton = (props)=>{
     }
 
     return(
-        <div>
+        <div className="add-menuContainer">
             {state.showCreateFolder? 
             <div className="modal__shadow">
                 <div className="modal__shadow__container">
                     <input type="text" onChange={(e)=> {state.inputValue = e.target.value; console.log(state.inputValue)}} required></input>
                     <span className="modal__shadow__container__buttonBox">
                         <button className="modal__shadow__container__buttonBox__button" onClick={createFolder}>Create</button>
-                        <button className="modal__shadow__container__buttonBox__button" onClick={()=>dispatch({type: "cancle_folder"})}>Cancle</button>
+                        <button className="modal__shadow__container__buttonBox__button" onClick={()=>dispatch({type: "cancel_folder"})}>Cancel</button>
                     </span>
                 </div>
             </div> : null}
 
-            {state.showMenu? <div><input type="file" multiple onChange={onFileChange}></input><button onClick={()=>dispatch({type: "show_create_folder"})}>Create folder</button></div>: null}
-            <button onClick={()=>dispatch({type:"showMenu"})}>Add</button>
+            {state.showMenu ? <div className="add-popupMenu"><input className="add-fileButton material-icons" type="file" multiple onChange={onFileChange}></input><button className="add-folderButton material-icons" onClick={()=>dispatch({type: "show_create_folder"})}>create_new_folder</button></div>: null}
+            <button className="add-icon material-icons" onClick={()=>dispatch({type: "showMenu"})}>add_circle_outline</button>
         </div>
     )
 }
