@@ -1,12 +1,14 @@
-import React, {useState} from "react";
+import React, { useEffect, useState} from "react";
 import "./menuPopUp.css";
+import {token$, updateToken} from "../../store/authToken";
+import Dropbox from "dropbox";
+import fetch from "isomorphic-fetch";
 
-let PopUp = (props) => {
-    console.log(props.name);
-    console.log(props.list);
-    
+let PopUp = (props) => {    
     const [name, updateName] = useState(props.name); 
-    let itemName = props.name; 
+    const [select, updateSelect] = useState("");
+    const [userToken, updateUserToken] = useState(token$.value); 
+    let itemName = props.name;     
     
     function closePop() {
         props.showState(false)
@@ -14,13 +16,23 @@ let PopUp = (props) => {
 
     function rename(e){
         updateName(e.target.value);
-        console.log(name);
-        
+
     }
 
-    function move(){
+    function move(e){
         console.log('move');
-        
+        console.log(props.path);
+        console.log(props.files);
+        console.log(select);
+
+
+
+       /* dbx
+        .filesMove({from_path:`/${props.path}`}, {to_path: `${select}`}) // funkar inte
+            .then(response=>{
+                console.log(response);
+                props.updateFiles();
+            })*/
     }
 
     function remove() {
@@ -49,9 +61,25 @@ let PopUp = (props) => {
                     <button onClick={closePop} className="popUp-content-btn">&times;</button>
                     <div className="popUp-content-box">
                         <p>Select where to move item</p>
-                        <select>
-                            <option>{props.name}</option>
-                            <option>då</option>
+                        <select className="moveItemList" onChange={(e)=> {updateSelect(e.target.value); console.log(select)}}>
+                            {props.files.map(function moveFunc (file) {
+                                let number = Math.random();         //unique key to moveSelections
+                                number.toString(36);
+                                let id = number.toString(36).substr(2, 9); 
+
+                                let dbx = new Dropbox.Dropbox({ fetch, accessToken: userToken });    
+                                dbx
+                                    .filesListFolder({ path: "" })
+                                    .then(function(response) {
+                                        let getFolder = response.entries;
+                                       // getFolder.map()
+                                        
+                                    })
+
+                                return(
+                                    file[".tag"] === "folder"? <option className="moveItemList-option" key={id} value={file.path_lower}>{file.name}</option> : null 
+                                )  
+                            })}
                         </select>
                         <button onClick={move}>Move</button>
                     </div>

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Dropbox from "dropbox";
 import fetch from "isomorphic-fetch";
-import ShowPop from "../components/ItemMenu/menuPopUp";
-
 import Item from "./Item";
 import AddFileButton from "../components/addFileAndFolder"; //component för att lägga till filer och mappar
 import {token$, updateToken} from "../store/authToken";
@@ -29,7 +27,6 @@ function ItemList(props) {
   }, [props.location.pathname]);
 
   function getFiles() {
-    console.log("test")
     let dbx = new Dropbox.Dropbox({ fetch, accessToken: userToken });
     dbx
       .filesListFolder({ path })
@@ -55,7 +52,7 @@ function ItemList(props) {
             <tbody>
               {files.map((file) => 
               <tr className='file-row' key={file.path_lower} > 
-                <Item file={file} />
+                <Item updateFiles={getFiles} path={path} file={file} files={files} /* files, används i menuPopup.js *//>
               </tr>
               )}
               </tbody>

@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import "./itemMenu.css";
 import ShowPop from "./menuPopUp"
 
-function ItemMenu(props) {    
+function ItemMenu(props) {            
     
     const [id, upDateId] = useState('');
     const [showPop, updateShowPop] = useState(false);
@@ -21,7 +21,7 @@ function ItemMenu(props) {
                 <button onClick={onClick} className="itemMenu-button openthird" id="copy" >Copy</button>
 
             </div>
-            {showPop ? <ShowPop list={props.list} name={props.name} showState={updateShowPop} className="showPop" sendId={id} /> : null}
+            {showPop ? <ShowPop updateFiles={props.getFiles} path={props.path} files={props.files} list={props.list} name={props.name} showState={updateShowPop} className="showPop" sendId={id} /> : null}
         </div>
 
     )  
