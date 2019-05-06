@@ -16,10 +16,10 @@ const CopyFilesAndFolders = (props) =>{
     function copyTarget(e){
         e.preventDefault();
         dbx
-            .filesCopy({path:`${props.path}/${props.name}`})
+            .filesCopy({from_path:`${props.path}/${props.name}`, to_path:`${props.path}/${props.name}`, autorename:true})
                 .then((response)=>{
                     console.log(response);
-                    props.updatefiles();
+                    props.updateFiles();
                 })
     }
 

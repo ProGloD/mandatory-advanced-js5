@@ -5,9 +5,8 @@ import ShowPop from "../components/ItemMenu/menuPopUp";
 
 import Item from "./Item";
 import AddFileButton from "../components/addFileAndFolder"; //component för att lägga till filer och mappar
-import {token$, updateToken} from "../store/authToken";
+import { token$, updateToken } from "../store/authToken";
 import Path from "./Path";
-
 
 function ItemList(props) {
   const [userToken, updateUserToken] = useState(token$.value);
@@ -29,12 +28,11 @@ function ItemList(props) {
   }, [props.location.pathname]);
 
   function getFiles() {
-    console.log("test")
+    console.log("test");
     let dbx = new Dropbox.Dropbox({ fetch, accessToken: userToken });
     dbx
       .filesListFolder({ path })
-      .then(function (response) {
-
+      .then(function(response) {
         let files = response.entries;
         updateFiles(files);
       })
@@ -55,7 +53,7 @@ function ItemList(props) {
             <tbody>
               {files.map((file) => 
               <tr className='file-row' key={file.path_lower} > 
-                <Item file={file} path={path} />
+                <Item file={file} path={path} updateFiles={getFiles} />
               </tr>
               )}
               </tbody>
