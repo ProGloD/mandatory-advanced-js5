@@ -40,27 +40,27 @@ function ItemList(props) {
   }
 
   return (
-    <div className="ItemList">
-      <Path path={path} />
-      <table className="item-table" cellSpacing="0" cellPadding="0">
-        <thead>
-          <tr className="head-row">
-            <th className="th-type">Type</th>
-            <th className="th-name">Name</th>
-            <th className="th-lastUpdate">Last Updated</th>
-            <th className="th-size">Size</th>
-          </tr>
-        </thead>
-        <tbody>
-          {files.map(file => (
-            <tr className="file-row" key={file.path_lower}>
-              <Item file={file} />
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <AddFileButton updateFiles={getFiles} path={path} />
-    </div>
+      <div className="ItemList">
+          <Path path={path} />
+          <table className='item-table' cellSpacing='0' cellPadding='0'>
+            <thead>
+            <tr className='head-row'>
+                <th className='th-type'>Type</th>
+                <th className='th-name'>Name</th>
+                <th className='th-lastUpdate'>Last Updated</th>
+                <th className='th-size'>Size</th>
+              </tr>
+            </thead>
+            <tbody>
+              {files.map((file) => 
+              <tr className='file-row' key={file.path_lower} > 
+                <Item file={file} path={path} updateFiles={getFiles} />
+              </tr>
+              )}
+              </tbody>
+          </table>
+            <AddFileButton updateFiles={getFiles} path={path}></AddFileButton>
+      </div>
   );
 }
 

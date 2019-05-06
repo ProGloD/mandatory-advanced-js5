@@ -1,9 +1,11 @@
 import React, {useState} from "react";
 import "./menuPopUp.css";
+import CopyFilesAndFolders from "./copyFiles"
 
 let PopUp = (props) => {
     console.log(props.name);
     console.log(props.list);
+    console.log(props);
     
     const [name, updateName] = useState(props.name); 
     let itemName = props.name; 
@@ -78,7 +80,7 @@ let PopUp = (props) => {
                     <button onClick={closePop} className="popUp-content-btn">&times;</button>
                     <div className="popUp-content-box">
                         <p>Are you sure you wanna Copy this item?</p>
-
+                        <CopyFilesAndFolders path={props.path} name={props.name} updateFiles={props.updateFiles}></CopyFilesAndFolders>
                     </div>
                 </div>
             </div>
