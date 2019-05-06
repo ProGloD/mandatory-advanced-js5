@@ -28,12 +28,11 @@ function ItemList(props) {
   }, [props.location.pathname]);
 
   function getFiles() {
-    console.log("test")
+    console.log("test");
     let dbx = new Dropbox.Dropbox({ fetch, accessToken: userToken });
     dbx
       .filesListFolder({ path })
-      .then(function (response) {
-
+      .then(function(response) {
         let files = response.entries;
         updateFiles(files);
       })
