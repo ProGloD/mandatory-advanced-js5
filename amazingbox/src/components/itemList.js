@@ -7,6 +7,7 @@ import Item from "./Item";
 import AddFileButton from "../components/addFileAndFolder"; //component för att lägga till filer och mappar
 import { token$, updateToken } from "../store/authToken";
 import Path from "./Path";
+import Search from "./Search";
 
 function ItemList(props) {
   const [userToken, updateUserToken] = useState(token$.value);
@@ -40,27 +41,28 @@ function ItemList(props) {
   }
 
   return (
-      <div className="ItemList">
-          <Path path={path} />
-          <table className='item-table' cellSpacing='0' cellPadding='0'>
-            <thead>
-            <tr className='head-row'>
-                <th className='th-type'>Type</th>
-                <th className='th-name'>Name</th>
-                <th className='th-lastUpdate'>Last Updated</th>
-                <th className='th-size'>Size</th>
-              </tr>
-            </thead>
-            <tbody>
-              {files.map((file) => 
-              <tr className='file-row' key={file.path_lower} > 
-                <Item file={file} path={path} updateFiles={getFiles} />
-              </tr>
-              )}
-              </tbody>
-          </table>
-            <AddFileButton updateFiles={getFiles} path={path}></AddFileButton>
-      </div>
+    <div className="ItemList">
+      <Search updateFiles={updateFiles} />
+      <Path path={path} />
+      <table className="item-table" cellSpacing="0" cellPadding="0">
+        <thead>
+          <tr className="head-row">
+            <th className="th-type">Type</th>
+            <th className="th-name">Name</th>
+            <th className="th-lastUpdate">Last Updated</th>
+            <th className="th-size">Size</th>
+          </tr>
+        </thead>
+        <tbody>
+          {files.map(file => (
+            <tr className="file-row" key={file.path_lower}>
+              <Item file={file} path={path} updateFiles={getFiles} />
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <AddFileButton updateFiles={getFiles} path={path} />
+    </div>
   );
 }
 
