@@ -60,14 +60,15 @@ code {
   position: fixed;
   flex-direction: row;
   left: 150px;
-  top: 31px;
+  top: 26px;
 }
 
 .add-fileButton, .add-folderButton {
+  display: inline-block;
+  width: 100px;
   border: none;
   outline: none;
   font-size: 22px;
-  text-align: left;
 }
 
 .add-fileButton {
@@ -76,6 +77,7 @@ code {
 
 .add-folderButton {
   position: fixed;
+  width: 20px;
   top: 32px;
 }
 
