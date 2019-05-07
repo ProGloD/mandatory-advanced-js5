@@ -2,7 +2,6 @@ import React, { useEffect, useState} from "react";
 import "./menuPopUp.css";
 import {token$, updateToken} from "../../store/authToken";
 import Dropbox from "dropbox";
-import fetch from "isomorphic-fetch";
 
 let PopUp = (props) => {    
     const [name, updateName] = useState(props.name); 
@@ -60,7 +59,18 @@ let PopUp = (props) => {
                 <div className="popUp-content">
                     <button onClick={closePop} className="popUp-content-btn">&times;</button>
                     <div className="popUp-content-box">
-                        <p>Select where to move item</p>
+                        <ul>
+                            <li></li>
+                        </ul>
+
+
+
+
+
+
+
+
+                        {/*<p>Select where to move item</p>
                         <select className="moveItemList" onChange={(e)=> {updateSelect(e.target.value); console.log(select)}}>
                             {props.files.map(function moveFunc (file) {
                                 let number = Math.random();         //unique key to moveSelections
@@ -80,7 +90,7 @@ let PopUp = (props) => {
                                     file[".tag"] === "folder"? <option className="moveItemList-option" key={id} value={file.path_lower}>{file.name}</option> : null 
                                 )  
                             })}
-                        </select>
+                        </select> */}
                         <button onClick={move}>Move</button>
                     </div>
                 </div>

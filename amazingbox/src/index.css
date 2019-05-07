@@ -14,6 +14,7 @@ code {
 }
 
 .nav-header {
+  min-width: 1150px;
   height: 90px;
   box-shadow: 0px -7px 35px 0px #00000063;
   line-height: 93px;
@@ -25,7 +26,7 @@ code {
 } 
 
 .logout-button {
-  position: absolute;
+  position: fixed;
   top: 35px;
   right: 20px;
   width: 100px;
@@ -41,6 +42,51 @@ code {
   color: #fff;
   transition: .2s ease;
   text-transform: uppercase;
+}
+
+.add-menuContainer {
+  position: fixed;
+  left: 100px;
+  top: 24px;
+}
+
+.add-icon {
+  font-size: 37px;
+  border: none;
+  outline: none;
+}
+
+.add-popupMenu {
+  position: fixed;
+  flex-direction: row;
+  left: 150px;
+  top: 26px;
+}
+
+.add-fileButton, .add-folderButton {
+  display: inline-block;
+  width: 100px;
+  border: none;
+  outline: none;
+  font-size: 25px;
+}
+
+.add-fileButton {
+  position: fixed;
+  left: 157px;
+  margin-bottom: 10px;
+  margin-top: 0px;
+  opacity: 0;
+  z-index: 2000;
+  width: 10px;
+}
+
+.add-folderButton {
+  position: fixed;
+  margin-left: 5px;
+  width: 20px;
+  top: 31px;
+  cursor: pointer;
 }
 
 .item-table {
@@ -99,6 +145,11 @@ tbody {
   text-overflow: ellipsis;
 }
 
+.td-name > a {
+  text-decoration: none;
+  color: #000;
+}
+
 .td-lastUpdate {
   position: relative;
   display: flex;
@@ -118,6 +169,43 @@ tbody {
   border: none;
   outline: none;
   background-color: transparent;
+}
+
+.modal__shadow__container {
+  position: fixed;
+  left: 250px;
+  top: 20px;
+  width: 550px;
+  height: 35px;
+  font-size: 15px;
+  background-color: transparent;
+  border-bottom: 1px solid #888;
+  outline-color: aquamarine;
+}
+
+.modal__shadow__input {
+  background-color: transparent;
+  font-size: 16px;
+  margin-right: 10px;
+  height: 30px;
+  width: 411px;
+  border: none;
+  outline: none;
+}
+
+.modal__shadow__container__buttonBox__button {
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  margin-top: 14px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.custom-file-label {
+  margin-top: 5px;
+  cursor: pointer;
 }
 
 
