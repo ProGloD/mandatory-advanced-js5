@@ -10,7 +10,7 @@ import CopyFilesAndFolders from "./copyFiles"
 let PopUp = (props) => {    
     
     const [name, updateName] = useState(props.name); 
-    const [select, updateSelect] = useState("");
+    const [errorMsg, updateErrorMsg] = useState("");
     const [userToken, updateUserToken] = useState(token$.value); 
     
     let itemName = props.name;     
@@ -28,18 +28,21 @@ let PopUp = (props) => {
         let dbx = new Dropbox.Dropbox({ fetch, accessToken: userToken });
         dbx
         .filesMove({from_path: `${props.path}/${itemName}`, to_path: `${props.path}/${name}`})
-        .then(function(response) {
-            props.updateFiles();
+        .then(function(response) {            
+        props.updateFiles();
+        })
+        .catch(function(error) {
+        updateErrorMsg(error)
         })
     }
-    
+
         if(props.sendId === "rename"){
             return(
                 <div className="popUp">
                     <div className="popUp-content">
                         <button onClick={closePop} className="popUp-content-btn">&times;</button>
                         <form onSubmit={submitRename} className="popUp-content-box">
-                            <p>Rename item</p>
+                            {errorMsg ? <p style={{color: "red"}}>Filename has already been taken</p> : <p>Rename item</p>}
                             <p>{itemName}</p>
                             <input onChange={rename} placeholder="New name"/>
                             <button type="submit">Ok</button>
