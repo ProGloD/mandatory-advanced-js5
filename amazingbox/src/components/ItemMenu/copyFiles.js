@@ -7,9 +7,6 @@ import "./copyFiles.css";
 //importera pathen genom store?? Bättre?
 
 const CopyFilesAndFolders = (props) =>{
-    console.log(token$);
-    console.log(props.path);
-    console.log(props.name);
     const [target, updateTarget] = useState(undefined); //filen jag vill kopiera
     const [userToken, updateUserToken] = useState(token$.value); 
     let dbx = new Dropbox.Dropbox({ fetch, accessToken: userToken });
@@ -17,7 +14,7 @@ const CopyFilesAndFolders = (props) =>{
     function copyTarget(e){
         e.preventDefault();
         dbx
-            .filesCopy({from_path:`${props.path}/${props.name}`, to_path:`${props.path}/${props.name}`, autorename:true})
+            .filesCopy({from_path:`${props.file.path_lower}`, to_path:`${props.path}/${props.file.name}`, autorename:true})
                 .then((response)=>{
                     console.log(response);
                     props.updateFiles();

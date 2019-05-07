@@ -50,7 +50,7 @@ let AddFileButton = (props)=>{
 
     function createFolder(){ //flytta till reducer, får fel i reducer, kolla med andreas
         dbx
-        .filesCreateFolder({path: `${props.path}/${state.inputValue}`}) //add folder name 
+        .filesCreateFolder({path: `${props.path}/${state.inputValue}`, autorename: true}) //add folder name 
             .then((response)=>{
                 console.log(response);
                 props.updateFiles();
