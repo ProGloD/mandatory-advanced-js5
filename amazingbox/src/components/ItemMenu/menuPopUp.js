@@ -1,13 +1,14 @@
-import React, {useState} from "react";
-import Dropbox from "dropbox";
+import React, { useEffect, useState} from "react";
 import "./menuPopUp.css";
+import {token$, updateToken} from "../../store/authToken";
+import Dropbox from "dropbox";
+import fetch from "isomorphic-fetch";
+
+
 import CopyFilesAndFolders from "./copyFiles"
 import { token$, updateToken } from "../../store/authToken";
 
-let PopUp = (props) => {
-    console.log(props.name);
-    console.log(props.list);
-    console.log(props);
+let PopUp = (props) => {    
     
     const [name, updateName] = useState(props.name); 
     const [files, updateFiles] = useState([]);
@@ -20,13 +21,18 @@ let PopUp = (props) => {
 
     function rename(e){
         updateName(e.target.value);
-        console.log(name);
-        
     }
 
-    function move(){
-        console.log('move');
-        
+    function submitRename(event){
+        event.preventDefault();        
+        dbx
+        .filesMove({from_path: `${props.path}/${itemName}`, to_path: `${props.path}/${name}`})
+        .then(function(response) {            
+        props.updateFiles();
+        })
+        .catch(function(error) {
+        updateErrorMsg(error)
+        })
     }
 
     function getAllFiles(){
@@ -52,8 +58,8 @@ let PopUp = (props) => {
                 <div className="popUp">
                     <div className="popUp-content">
                         <button onClick={closePop} className="popUp-content-btn">&times;</button>
-                        <form onSubmit={rename} className="popUp-content-box">
-                            <p>Rename item</p>
+                        <form onSubmit={submitRename} className="popUp-content-box">
+                            {errorMsg ? <p style={{color: "red"}}>Filename has already been taken</p> : <p>Rename item</p>}
                             <p>{itemName}</p>
                             <input onChange={rename} placeholder="New name"/>
                             <button type="submit">Ok</button>
@@ -87,7 +93,7 @@ let PopUp = (props) => {
                     <button onClick={closePop} className="popUp-content-btn">&times;</button>
                     <div className="popUp-content-box">
                         <p>Are you sure you wanna remove this item?</p>
-                        <button onClick={remove}>Yes</button>
+                        <button onClick={props.remove}>Yes</button>
                         <button onClick={closePop}>Cancel</button>
                     </div>
                 </div>
@@ -99,7 +105,7 @@ let PopUp = (props) => {
                 <div className="popUp-content">
                     <button onClick={closePop} className="popUp-content-btn">&times;</button>
                     <div className="popUp-content-box">
-                        <p>Are you sure you wanna Copy this item?</p>
+                        <p>Are you sure you wanna copy this item?</p>
                         <CopyFilesAndFolders path={props.path} name={props.name} updateFiles={props.updateFiles}></CopyFilesAndFolders>
                     </div>
                 </div>

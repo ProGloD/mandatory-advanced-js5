@@ -2,6 +2,7 @@ import React, {useReducer, useState} from "react";
 import Dropbox from "dropbox";
 import fetch from "isomorphic-fetch";
 import { token$, updateToken } from "../../store/authToken";
+import "./copyFiles.css";
 
 //importera pathen genom store?? Bättre?
 
@@ -27,9 +28,9 @@ const CopyFilesAndFolders = (props) =>{
     return(
         <span> 
             <form onSubmit={copyTarget}>
-                <button type="submit">Copy</button>
+                <button className="copyButtons" type="submit">Copy</button>
             </form>
-            <button>Cancle</button>
+            <button className="copyButtons">Cancel</button>
         </span>
     )
 }
