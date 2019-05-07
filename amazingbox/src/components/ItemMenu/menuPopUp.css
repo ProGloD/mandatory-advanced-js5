@@ -17,7 +17,7 @@
 
 .popUp-content{
     background-color: white;
-    height: 250px;
+    min-height: 250px;
     width: 300px;
     border-radius: 20px;
     position: relative;
@@ -35,10 +35,8 @@
 }
 
 .popUp-content-box {
-    position: absolute;
     top: 40px;
     left: 20px;
-    max-width: 250px;
     text-align: center;
 }
 
