@@ -21,7 +21,7 @@ function ItemMenu(props) {
                 <button onClick={onClick} className="itemMenu-button openthird" id="copy" >Copy</button>
 
             </div>
-            {showPop ? <ShowPop list={props.list} name={props.name} path={props.path} showState={updateShowPop} updateFiles={props.updateFiles} className="showPop" sendId={id} remove={props.remove} /> : null}
+            {showPop ? <ShowPop list={props.list} file={props.file} path={props.path} showState={updateShowPop} updateFiles={props.updateFiles} className="showPop" sendId={id} remove={props.remove} /> : null}
         </div>
 
     )  
