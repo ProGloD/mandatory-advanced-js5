@@ -234,6 +234,19 @@ tbody {
   cursor: pointer;
 }
 
+.openfirst {
+  animation: popup 0.2s ease;
+}
+
+.opensecond {
+  animation: popup 0.6s ease;
+}
+
+@keyframes popup {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
 
 
 
