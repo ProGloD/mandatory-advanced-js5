@@ -5,6 +5,7 @@ import Item from "./Item";
 import AddFileButton from "../components/addFileAndFolder"; //component för att lägga till filer och mappar
 import { token$, updateToken } from "../store/authToken";
 import Path from "./Path";
+import Search from "./Search";
 
 function ItemList(props) {
   const [userToken, updateUserToken] = useState(token$.value);
@@ -38,6 +39,7 @@ function ItemList(props) {
 
   return (
     <div className="ItemList">
+      <Search updateFiles={updateFiles} />
       <Path path={path} />
       <table className="item-table" cellSpacing="0" cellPadding="0">
         <thead>
@@ -51,7 +53,7 @@ function ItemList(props) {
         <tbody>
           {files.map(file => (
             <tr className="file-row" key={file.path_lower}>
-                <Item updateFiles={getFiles} path={path} file={file} files={files} /* files, används i menuPopup.js *//>
+                <Item updateFiles={getFiles} path={path} file={file}/>
             </tr>
           ))}
         </tbody>

@@ -5,7 +5,6 @@ import fetch from "isomorphic-fetch";
 import ItemList from "./itemList";
 import { token$, updateToken } from "../store/authToken";
 
-
 const Home = props => {
   const [userToken, updateUserToken] = useState(token$.value);
 
@@ -30,10 +29,12 @@ const Home = props => {
   if (!userToken) {
     return <Redirect to="/auth" />;
   }
-  
+
   return (
     <>
-      <button className='logout-button' onClick={logOut}>Log out</button>
+      <button className="logout-button" onClick={logOut}>
+        Log out
+      </button>
       <main>
         <ItemList location={props.location} />
       </main>

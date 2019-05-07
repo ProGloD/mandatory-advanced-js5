@@ -5,21 +5,19 @@ function Path(props) {
   const path = props.path.split("/");
 
   return (
-    <div>
+    <div className="path-list">
       {path.map((element, index) => {
         const way = path.slice(0, index + 1).join("/");
 
         if (!way) {
           return (
             <Link key={way} to="/">
-              amazingbox
+              > amazingbox
             </Link>
           );
         } else {
           return (
-            <Link key={way} to={`/home${way}`}>
-              /{element}
-            </Link>
+            <Link key={way} to={`/home${way}`}> &gt; {element}</Link>
           );
         }
       })}
