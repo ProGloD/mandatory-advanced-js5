@@ -25,13 +25,12 @@ const CopyFilesAndFolders = (props) =>{
 
     //skippa input och bara döpan kopian till copy??
     return(
-        <form onSubmit={copyTarget}>
-
-            <span>  
+        <span> 
+            <form onSubmit={copyTarget}>
                 <button type="submit">Copy</button>
-                <button>Cancle</button>
-            </span>
-        </form>
+            </form>
+            <button>Cancle</button>
+        </span>
     )
 }
 export default CopyFilesAndFolders;

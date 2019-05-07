@@ -1,6 +1,8 @@
 import React, {useState} from "react";
+import Dropbox from "dropbox";
 import "./menuPopUp.css";
 import CopyFilesAndFolders from "./copyFiles"
+import { token$, updateToken } from "../../store/authToken";
 
 let PopUp = (props) => {
     console.log(props.name);
@@ -8,7 +10,9 @@ let PopUp = (props) => {
     console.log(props);
     
     const [name, updateName] = useState(props.name); 
+    const [files, updateFiles] = useState([]);
     let itemName = props.name; 
+    let dbx = new Dropbox.Dropbox({ fetch, accessToken: token$.value});
     
     function closePop() {
         props.showState(false)
@@ -23,6 +27,19 @@ let PopUp = (props) => {
     function move(){
         console.log('move');
         
+    }
+
+    function getAllFiles(){
+        dbx
+            .filesListFolder({path: "", recursive: true})
+                .then(response=>{
+                    console.log(response);
+                        let files = response.entries
+                    updateFiles(files);
+                })
+            .catch(error=>{
+                console.log(error);
+            })
     }
 
     function remove() {
@@ -51,10 +68,13 @@ let PopUp = (props) => {
                     <button onClick={closePop} className="popUp-content-btn">&times;</button>
                     <div className="popUp-content-box">
                         <p>Select where to move item</p>
-                        <select>
-                            <option>{props.name}</option>
-                            <option>då</option>
-                        </select>
+                        <ul>
+                        {files.length === 0? getAllFiles() : files.map(file=>{
+                            if(file[".tag"] === "folder"){
+                                return <li key={file.id}>{file.name}</li>
+                            }
+                        })}
+                        </ul>
                         <button onClick={move}>Move</button>
                     </div>
                 </div>
