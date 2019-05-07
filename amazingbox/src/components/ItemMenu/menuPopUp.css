@@ -60,4 +60,15 @@
     text-transform: uppercase;
 }
 
+.moveItemList{
+    min-width: 110px;
+    height: 25px;
+    border-radius: 15px;
+    outline: none;
+    cursor: pointer;
+}
 
+.moveItemList-option {
+    border: none;
+    margin-top: 20px;
+}

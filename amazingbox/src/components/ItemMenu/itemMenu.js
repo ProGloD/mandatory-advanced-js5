@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import "./itemMenu.css";
 import ShowPop from "./menuPopUp"
 
-function ItemMenu(props) {    
+function ItemMenu(props) {            
     
     const [id, upDateId] = useState('');
     const [showPop, updateShowPop] = useState(false);
