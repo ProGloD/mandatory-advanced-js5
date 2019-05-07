@@ -3,16 +3,15 @@ import ItemMenu from "../components/ItemMenu/itemMenu";
 import { Link } from "react-router-dom";
 import Dropbox from "dropbox";
 import fetch from "isomorphic-fetch";
-
 import { getTime, bytesToSize } from "../utils";
 import {token$} from "../store/authToken"
 
-function Item(props) {
+function Item(props) {    
     
     const [showMenu, updateShowMenu] = useState(false);
     const [image, updateImage] = useState("");
     const file = props.file;
-    const type = file[".tag"];
+    const type = file[".tag"];    
 
     useEffect(() => {
         if (checkIfImage(file.name)) {
@@ -23,15 +22,11 @@ function Item(props) {
     }, [file]);
 
     function getThumbnail(path) {
-        console.log("image");
-        console.log(path);
 
         let dbx = new Dropbox.Dropbox({ fetch, accessToken: token$.value });
         dbx
           .filesGetThumbnail({path})
-          .then(response => {  
-            console.log(response)
-            
+          .then(response => {              
             updateImage(<img className="thumbnail" src={window.URL.createObjectURL(response.fileBlob)}></img>);
           })
           .catch(_ => {
@@ -49,7 +44,7 @@ function Item(props) {
         }
         else {
             return false;
-        }
+        } 
     }
 
     return (
