@@ -2,13 +2,12 @@ import React, { useEffect, useState} from "react";
 import "./menuPopUp.css";
 import {token$, updateToken} from "../../store/authToken";
 import Dropbox from "dropbox";
+import fetch from "isomorphic-fetch";
+
 
 import CopyFilesAndFolders from "./copyFiles"
 
-let PopUp = (props) => {
-    console.log(props.name);
-    console.log(props.list);
-    console.log(props);
+let PopUp = (props) => {    
     
     const [name, updateName] = useState(props.name); 
     const [select, updateSelect] = useState("");
@@ -24,17 +23,14 @@ let PopUp = (props) => {
         updateName(e.target.value);
     }
 
-    function submitRename(e){
-        
-    }
-
-    function move(e){
-
-    }
-
-    function remove() {
-        console.log('remove');
-        
+    function submitRename(event){
+        event.preventDefault();        
+        let dbx = new Dropbox.Dropbox({ fetch, accessToken: userToken });
+        dbx
+        .filesMove({from_path: `${props.path}/${itemName}`, to_path: `${props.path}/${name}`})
+        .then(function(response) {
+            props.updateFiles();
+        })
     }
     
         if(props.sendId === "rename"){
@@ -61,7 +57,7 @@ let PopUp = (props) => {
                             <li></li>
                         </ul>
 
-                        <button onClick={move}>Move</button>
+                        <button>Move</button>
                     </div>
                 </div>
             </div>
@@ -73,7 +69,7 @@ let PopUp = (props) => {
                     <button onClick={closePop} className="popUp-content-btn">&times;</button>
                     <div className="popUp-content-box">
                         <p>Are you sure you wanna remove this item?</p>
-                        <button onClick={remove}>Yes</button>
+                        <button onClick={props.remove}>Yes</button>
                         <button onClick={closePop}>Cancel</button>
                     </div>
                 </div>
@@ -85,7 +81,7 @@ let PopUp = (props) => {
                 <div className="popUp-content">
                     <button onClick={closePop} className="popUp-content-btn">&times;</button>
                     <div className="popUp-content-box">
-                        <p>Are you sure you wanna Copy this item?</p>
+                        <p>Are you sure you wanna copy this item?</p>
                         <CopyFilesAndFolders path={props.path} name={props.name} updateFiles={props.updateFiles}></CopyFilesAndFolders>
                     </div>
                 </div>
