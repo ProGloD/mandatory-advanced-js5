@@ -54,7 +54,7 @@ function Item(props) {
             <td className='td-lastUpdate'>{type !== "folder" ? getTime(file.server_modified) : null}</td>
             <td className='td-size'>{type !== "folder" ? bytesToSize(file.size) : null}</td>
             <td className='td-menuButton'><button onClick={() => !showMenu ? updateShowMenu(true) : updateShowMenu(false)} className="td-menuButton material-icons">more_horiz</button></td>
-            <td className='td-menu'>{showMenu ? <ItemMenu list={file} name={file.name} path={props.path} updateFiles={props.updateFiles} remove={props.remove}></ItemMenu> : null}</td>
+            <td className='td-menu'>{showMenu ? <ItemMenu file={file} path={props.path} updateFiles={props.updateFiles} remove={props.remove}></ItemMenu> : null}</td>
         </>
     );
 }
