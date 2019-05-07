@@ -40,6 +40,15 @@ function ItemList(props) {
       .catch(_ => updateToken(null));
   }
 
+  function remove(path) {
+    console.log(path);
+    let dbx = new Dropbox.Dropbox({ fetch, accessToken: userToken });
+    dbx
+      .filesDelete({path})
+      .then(_ => getFiles())
+      .catch(error => console.log(error));
+  }
+
   return (
     <div className="ItemList">
       <Search updateFiles={updateFiles} />
@@ -56,7 +65,7 @@ function ItemList(props) {
         <tbody>
           {files.map(file => (
             <tr className="file-row" key={file.path_lower}>
-              <Item file={file} path={path} updateFiles={getFiles} />
+              <Item file={file} path={path} updateFiles={getFiles} remove={() => remove(file.path_lower)} />
             </tr>
           ))}
         </tbody>

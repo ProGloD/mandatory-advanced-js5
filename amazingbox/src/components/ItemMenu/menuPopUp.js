@@ -24,11 +24,6 @@ let PopUp = (props) => {
         console.log('move');
         
     }
-
-    function remove() {
-        console.log('remove');
-        
-    }
     
         if(props.sendId === "rename"){
             return(
@@ -67,7 +62,7 @@ let PopUp = (props) => {
                     <button onClick={closePop} className="popUp-content-btn">&times;</button>
                     <div className="popUp-content-box">
                         <p>Are you sure you wanna remove this item?</p>
-                        <button onClick={remove}>Yes</button>
+                        <button onClick={props.remove}>Yes</button>
                         <button onClick={closePop}>Cancel</button>
                     </div>
                 </div>
@@ -79,7 +74,7 @@ let PopUp = (props) => {
                 <div className="popUp-content">
                     <button onClick={closePop} className="popUp-content-btn">&times;</button>
                     <div className="popUp-content-box">
-                        <p>Are you sure you wanna Copy this item?</p>
+                        <p>Are you sure you wanna copy this item?</p>
                         <CopyFilesAndFolders path={props.path} name={props.name} updateFiles={props.updateFiles}></CopyFilesAndFolders>
                     </div>
                 </div>
