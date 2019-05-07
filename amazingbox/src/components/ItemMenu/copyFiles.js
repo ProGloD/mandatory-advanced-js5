@@ -30,7 +30,6 @@ const CopyFilesAndFolders = (props) =>{
 
             <span>  
                 <button className="copyButtons" type="submit">Copy</button>
-                <button className="copyButtons">Cancle</button>
             </span>
         </form>
     )
