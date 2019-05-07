@@ -42,7 +42,7 @@ function ItemList(props) {
 
   return (
     <div className="ItemList">
-      <Search updateFiles={updateFiles} />
+      <Search updateFiles={updateFiles} getFiles={getFiles} />
       <Path path={path} />
       <table className="item-table" cellSpacing="0" cellPadding="0">
         <thead>
