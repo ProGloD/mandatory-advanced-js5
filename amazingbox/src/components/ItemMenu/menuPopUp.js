@@ -6,14 +6,14 @@ import fetch from "isomorphic-fetch";
 
 
 import CopyFilesAndFolders from "./copyFiles"
-import { token$, updateToken } from "../../store/authToken";
 
 let PopUp = (props) => {    
     
     const [name, updateName] = useState(props.name); 
-    const [files, updateFiles] = useState([]);
-    let itemName = props.name; 
-    let dbx = new Dropbox.Dropbox({ fetch, accessToken: token$.value});
+    const [errorMsg, updateErrorMsg] = useState("");
+    const [userToken, updateUserToken] = useState(token$.value); 
+    
+    let itemName = props.name;     
     
     function closePop() {
         props.showState(false)
@@ -25,6 +25,7 @@ let PopUp = (props) => {
 
     function submitRename(event){
         event.preventDefault();        
+        let dbx = new Dropbox.Dropbox({ fetch, accessToken: userToken });
         dbx
         .filesMove({from_path: `${props.path}/${itemName}`, to_path: `${props.path}/${name}`})
         .then(function(response) {            
@@ -35,24 +36,6 @@ let PopUp = (props) => {
         })
     }
 
-    function getAllFiles(){
-        dbx
-            .filesListFolder({path: "", recursive: true})
-                .then(response=>{
-                    console.log(response);
-                        let files = response.entries
-                    updateFiles(files);
-                })
-            .catch(error=>{
-                console.log(error);
-            })
-    }
-
-    function remove() {
-        console.log('remove');
-        
-    }
-    
         if(props.sendId === "rename"){
             return(
                 <div className="popUp">
@@ -73,15 +56,11 @@ let PopUp = (props) => {
                 <div className="popUp-content">
                     <button onClick={closePop} className="popUp-content-btn">&times;</button>
                     <div className="popUp-content-box">
-                        <p>Select where to move item</p>
                         <ul>
-                        {files.length === 0? getAllFiles() : files.map(file=>{
-                            if(file[".tag"] === "folder"){
-                                return <li key={file.id}>{file.name}</li>
-                            }
-                        })}
+                            <li></li>
                         </ul>
-                        <button onClick={move}>Move</button>
+
+                        <button>Move</button>
                     </div>
                 </div>
             </div>
@@ -106,7 +85,7 @@ let PopUp = (props) => {
                     <button onClick={closePop} className="popUp-content-btn">&times;</button>
                     <div className="popUp-content-box">
                         <p>Are you sure you wanna copy this item?</p>
-                        <CopyFilesAndFolders path={props.path} name={props.name} updateFiles={props.updateFiles}></CopyFilesAndFolders>
+                        <CopyFilesAndFolders closePop={closePop} path={props.path} name={props.name} updateFiles={props.updateFiles}></CopyFilesAndFolders>
                     </div>
                 </div>
             </div>
