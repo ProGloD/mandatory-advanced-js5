@@ -17,7 +17,7 @@ function ItemMenu(props) {
             <div className="itemMenu">
                 <button onClick={onClick} className="itemMenu-button openfirst" id="rename" >Rename</button>
                 <button onClick={onClick} className="itemMenu-button opensecond" id="move" >Move</button>
-                <button onClick={onClick} className="itemMenu-button openthird" id="remove" >Remove</button>
+                <button onClick={onClick} className="itemMenu-button openthird" id="remove" >Delete</button>
                 <button onClick={onClick} className="itemMenu-button openthird" id="copy" >Copy</button>
 
             </div>
