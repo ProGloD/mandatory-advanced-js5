@@ -4,6 +4,7 @@ import fetch from "isomorphic-fetch";
 import { useDebounce } from "use-debounce";
 
 import { token$ } from "../store/authToken";
+import "../css/Search.css";
 
 function Search(props) {
   const [query, updateQuery] = useState("");
@@ -33,9 +34,16 @@ function Search(props) {
   }
 
   return (
-    <div>
-      <input onChange={handleChange} placeholder="Search" value={query} />
-      <button onClick={cleanQuery}>&times;</button>
+    <div className="search-bar">
+      <input
+        className="search-bar__text-input"
+        onChange={handleChange}
+        placeholder="Search"
+        value={query}
+      />
+      <button className="search-bar__clear-button" onClick={cleanQuery}>
+        &times;
+      </button>
     </div>
   );
 }
