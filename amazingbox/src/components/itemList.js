@@ -19,9 +19,10 @@ function ItemList(props) {
       updateUserToken(token);
     });
 
-    getFiles();
+    let interval = setInterval(getFiles, 5000);
 
     return () => {
+      clearInterval(interval);
       subscription.unsubscribe();
     };
   }, [props.location.pathname]);
@@ -41,7 +42,7 @@ function ItemList(props) {
     console.log(path);
     let dbx = new Dropbox.Dropbox({ fetch, accessToken: userToken });
     dbx
-      .filesDelete({path})
+      .filesDelete({ path })
       .then(_ => getFiles())
       .catch(error => console.log(error));
   }
@@ -62,7 +63,12 @@ function ItemList(props) {
         <tbody>
           {files.map(file => (
             <tr className="file-row" key={file.path_lower}>
-              <Item file={file} path={path} updateFiles={getFiles} remove={() => remove(file.path_lower)} />
+              <Item
+                file={file}
+                path={path}
+                updateFiles={getFiles}
+                remove={() => remove(file.path_lower)}
+              />
             </tr>
           ))}
         </tbody>
