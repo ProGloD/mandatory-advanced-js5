@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Dropbox from "dropbox";
 import fetch from "isomorphic-fetch";
 import Item from "./Item";
-import AddFileButton from "../components/addFileAndFolder"; //component för att lägga till filer och mappar
+import AddFileButton from "./addFileAndFolder"; //component för att lägga till filer och mappar
 import { token$, updateToken } from "../store/authToken";
 import Path from "./Path";
 import Search from "./Search";
