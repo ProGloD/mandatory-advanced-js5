@@ -1,23 +1,19 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
-import Dropbox from "dropbox";
-import fetch from "isomorphic-fetch";
 
+import { login } from "../utils";
 import { token$ } from "../store/authToken";
 
-let key = "kvms35pmp4vwz5n";
-
-let dbx = new Dropbox.Dropbox({ fetch, clientId: key });
-let authUrl = dbx.getAuthenticationUrl("http://localhost:3000/auth-done");
-
-const Login = () => {
+function Login() {
   if (token$.value) {
     return <Redirect to="/" />;
   }
 
+  let auth = login();
+
   return (
     <>
-      <a href={authUrl}>
+      <a href={auth}>
         <button>
           Login using Dropbox{" "}
           <img
@@ -29,6 +25,6 @@ const Login = () => {
       </a>
     </>
   );
-};
+}
 
 export default Login;

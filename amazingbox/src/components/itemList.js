@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Dropbox from "dropbox";
 import fetch from "isomorphic-fetch";
 import Item from "./Item";
-import AddFileButton from "../components/addFileAndFolder"; //component för att lägga till filer och mappar
+import AddFileButton from "./addFileAndFolder"; //component för att lägga till filer och mappar
 import { token$, updateToken } from "../store/authToken";
 import { favorite$, updateFavorite } from "../store/favoriteStore";
 import Favorites from "../components/favorites";
@@ -22,9 +22,10 @@ function ItemList(props) {
       updateUserToken(token);
     });
 
-    getFiles();
+    let interval = setInterval(getFiles, 5000);
 
     return () => {
+      clearInterval(interval);
       subscription.unsubscribe();
     };
   }, [props.location.pathname]);
@@ -44,7 +45,7 @@ function ItemList(props) {
     console.log(path);
     let dbx = new Dropbox.Dropbox({ fetch, accessToken: userToken });
     dbx
-      .filesDelete({path})
+      .filesDelete({ path })
       .then(_ => getFiles())
       .catch(error => console.log(error));
   }
@@ -65,7 +66,16 @@ function ItemList(props) {
         <tbody>
           {files.map(file => (
             <tr className="file-row" key={file.path_lower}>
+<<<<<<< HEAD
               {favorites ? <Item file={file} path={path} updateFiles={getFiles} remove={() => remove(file.path_lower)} /> : <Favorites file={file} />}
+=======
+              <Item
+                file={file}
+                path={path}
+                updateFiles={getFiles}
+                remove={() => remove(file.path_lower)}
+              />
+>>>>>>> 3f50b43f6c65734e79c8a880626fe7c6d109abec
             </tr>
           ))}
         </tbody>

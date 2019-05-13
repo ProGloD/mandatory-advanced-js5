@@ -73,7 +73,7 @@ let AddFileButton = (props)=>{
             {state.showMenu ? <div className="add-popupMenu"><input className="add-fileButton material-icons" type="file" multiple onChange={onFileChange}></input>   
             <label className="custom-file-label material-icons openfirst" htmlFor="inputGroupFile01">insert_drive_file</label>
             <button className="add-folderButton material-icons opensecond" onClick={()=>dispatch({type: "show_create_folder"})}>create_new_folder</button></div> : null}
-            <button className="add-icon material-icons" onClick={()=>dispatch({type: "showMenu"})}>add_circle_outline</button>
+            <button className="add-button add-icon material-icons" onClick={()=>dispatch({type: "showMenu"})}>add_circle_outline</button>
         </div>
     )
 }
