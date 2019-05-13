@@ -85,7 +85,7 @@ code {
 
 .add-folderButton {
   background-color: initial;
-  position: absolute;
+  position: fixed;
   margin-left: 5px;
   width: 20px;
   top: 31px;
