@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Login from "./components/login";
-import Home from "./components/home";
-import LoginDone from "./components/loginDone";
+import Login from "./components/Login";
+import Home from "./components/Home";
+import LoginDone from "./components/LoginDone";
 import "../src/components/ItemMenu/menuPopUp.css";
 
 function App() {
@@ -10,9 +10,9 @@ function App() {
     <Router>
       <div className="App">
         <header className="nav-header">
-            <Link className="home-icon material-icons" to="/">
-              home
-            </Link>
+          <Link className="home-icon material-icons" to="/">
+            home
+          </Link>
         </header>
 
         <Route exact path="/" component={Home} />
