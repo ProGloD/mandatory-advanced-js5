@@ -66,16 +66,12 @@ function ItemList(props) {
         <tbody>
           {files.map(file => (
             <tr className="file-row" key={file.path_lower}>
-<<<<<<< HEAD
-              {favorites ? <Item file={file} path={path} updateFiles={getFiles} remove={() => remove(file.path_lower)} /> : <Favorites file={file} />}
-=======
               <Item
                 file={file}
                 path={path}
                 updateFiles={getFiles}
                 remove={() => remove(file.path_lower)}
               />
->>>>>>> 3f50b43f6c65734e79c8a880626fe7c6d109abec
             </tr>
           ))}
         </tbody>
