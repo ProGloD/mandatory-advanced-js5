@@ -4,6 +4,7 @@ import Dropbox from "dropbox";
 import fetch from "isomorphic-fetch";
 import ItemList from "./itemList";
 import { token$, updateToken } from "../store/authToken";
+import {updateFavorite} from "../store/favoriteStore";
 
 const Home = props => {
   const [userToken, updateUserToken] = useState(token$.value);
@@ -22,7 +23,10 @@ const Home = props => {
     let dbx = new Dropbox.Dropbox({ fetch, accessToken: userToken });
     dbx
       .authTokenRevoke()
-      .then(_ => updateToken(null))
+      .then(_ => {
+        updateToken(null);
+        updateFavorite(null);
+      })
       .catch(error => console.log(error));
   }
 

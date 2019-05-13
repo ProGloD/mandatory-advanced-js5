@@ -4,11 +4,14 @@ import fetch from "isomorphic-fetch";
 import Item from "./Item";
 import AddFileButton from "../components/addFileAndFolder"; //component för att lägga till filer och mappar
 import { token$, updateToken } from "../store/authToken";
+import { favorite$, updateFavorite } from "../store/favoriteStore";
+import Favorites from "../components/favorites";
 import Path from "./Path";
 import Search from "./Search";
 
 function ItemList(props) {
   const [userToken, updateUserToken] = useState(token$.value);
+  const [favorites, updateFavorite] = useState(favorite$.value);  
   const [files, updateFiles] = useState([]);
 
   const path =
@@ -62,7 +65,7 @@ function ItemList(props) {
         <tbody>
           {files.map(file => (
             <tr className="file-row" key={file.path_lower}>
-              <Item file={file} path={path} updateFiles={getFiles} remove={() => remove(file.path_lower)} />
+              {favorites ? <Item file={file} path={path} updateFiles={getFiles} remove={() => remove(file.path_lower)} /> : <Favorites file={file} />}
             </tr>
           ))}
         </tbody>
