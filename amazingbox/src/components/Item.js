@@ -8,6 +8,7 @@ import path from "./Path";
 import { getTime, bytesToSize } from "../utils";
 import {token$} from "../store/authToken"
 
+
 let dbx = new Dropbox.Dropbox({ fetch, accessToken: token$.value });
 
 function Item(props) {
@@ -68,15 +69,20 @@ function Item(props) {
           .catch(error => console.log(error));
     }
 
+    function addFavorite() {
+        
+    }
+
     return (
         <>
+            <button className="favorite-Button material-icons" onClick={addFavorite}>star_border</button>
             <td className="td-type material-icons">{type === "folder" ? "folder" : image}</td>
-            <td className='td-name'>{type === "folder" ? <Link to={`/home${file.path_display}`}>{file.name}</Link> : file.name}</td>
-            <td className='td-lastUpdate'>{type !== "folder" ? getTime(file.server_modified) : null}</td>
-            <td className='td-size'>{type !== "folder" ? bytesToSize(file.size) : null}</td>
+            <td className="td-name">{type === "folder" ? <Link to={`/home${file.path_display}`}>{file.name}</Link> : file.name}</td>
+            <td className="td-lastUpdate">{type !== "folder" ? getTime(file.server_modified) : null}</td>
+            <td className="td-size">{type !== "folder" ? bytesToSize(file.size) : null}</td>
             <td className="td-download material-icons">{type === "file" ? <span onClick={download}>cloud_download</span> : null}</td>
-            <td className='td-menuButton'><button onClick={() => !showMenu ? updateShowMenu(true) : updateShowMenu(false)} className="td-menuButton material-icons">more_horiz</button></td>
-            <td className='td-menu'>{showMenu ? <ItemMenu file={file} path={props.path} updateFiles={props.updateFiles} remove={props.remove}></ItemMenu> : null}</td>
+            <td className="td-menuButton"><button onClick={() => !showMenu ? updateShowMenu(true) : updateShowMenu(false)} className="td-menuButton material-icons">more_horiz</button></td>
+            <td className="td-menu">{showMenu ? <ItemMenu file={file} path={props.path} updateFiles={props.updateFiles} remove={props.remove}></ItemMenu> : null}</td>
         </>
     );
 }
