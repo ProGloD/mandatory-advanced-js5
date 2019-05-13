@@ -94,7 +94,7 @@ let PopUp = (props) => {
                 <div className="popUp-content">
                     <button onClick={closePop} className="popUp-content-btn">&times;</button>
                     <div className="popUp-content-box">
-                        <p>Are you sure you wanna remove this item?</p>
+                        <p>Are you sure you wanna delete this item?</p>
                         <button onClick={props.remove}>Yes</button>
                         <button onClick={closePop}>Cancel</button>
                     </div>

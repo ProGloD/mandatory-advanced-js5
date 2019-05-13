@@ -32,9 +32,7 @@ function Item(props) {
         console.log(path);
         dbx
           .filesGetThumbnail({path})
-          .then(response => {  
-            console.log(response)
-            
+          .then(response => {              
             updateImage(<img className="thumbnail" src={window.URL.createObjectURL(response.fileBlob)}></img>);
           })
           .catch(_ => {
@@ -52,7 +50,7 @@ function Item(props) {
         }
         else {
             return false;
-        }
+        } 
     }
 
     function download() {
