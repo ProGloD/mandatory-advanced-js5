@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Login from "./components/login";
+import Login from "./components/Login";
 import Home from "./components/home";
 import Favorites from "./components/favorites";
-import LoginDone from "./components/loginDone";
+import LoginDone from "./components/LoginDone";
 import "../src/components/ItemMenu/menuPopUp.css";
 
 function App() {
@@ -11,12 +11,13 @@ function App() {
     <Router>
       <div className="App">
         <header className="nav-header">
-            <Link className="home-icon material-icons" to="/">
-              home
-            </Link>
-            <Link className="favorites" to="/favorites">
-              <i className="favorites-icon material-icons">star</i> <span className="favorites-text">Favorites</span>
-            </Link>
+          <Link className="home-icon material-icons" to="/">
+            home
+          </Link>
+          <Link className="favorites" to="/favorites">
+            <i className="favorites-icon material-icons">star</i>{" "}
+            <span className="favorites-text">Favorites</span>
+          </Link>
         </header>
 
         <Route exact path="/" component={Home} />
