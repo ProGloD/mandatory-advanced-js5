@@ -12,7 +12,6 @@
     width: 60px;
     font-size: 14px;
     font-weight: 600;
-    margin: 5px;
 }
 
 .opensecond {
@@ -24,10 +23,14 @@
 }
 
 .opensecond {
-    animation: popup 0.8s ease;
+    animation: popup 0.6s ease;
 }
 
 .openthird {
+    animation: popup 1s ease;
+}
+
+.openfourth {
     animation: popup 1.4s ease;
 }
 

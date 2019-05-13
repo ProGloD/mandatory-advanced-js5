@@ -89,7 +89,6 @@ code {
   margin-left: 5px;
   width: 20px;
   top: 31px;
-  cursor: pointer;
 }
 
 .path-list {
@@ -167,6 +166,12 @@ tbody {
   margin-left: -3px;
 }
 
+.td-download {
+  cursor: pointer;
+  position: absolute;
+  margin-top: 12px;
+}
+
 .td-name {
   width: 315px;
   text-overflow: ellipsis;
@@ -192,6 +197,7 @@ tbody {
 
 .td-menuButton {
   padding-right: 5px;
+  padding-left: 20px;
   margin-top: 6px;
   border: none;
   outline: none;
@@ -232,7 +238,19 @@ tbody {
 
 .custom-file-label {
   margin-top: 5px;
-  cursor: pointer;
+}
+
+.openfirst {
+  animation: popup 0.2s ease;
+}
+
+.opensecond {
+  animation: popup 0.6s ease;
+}
+
+@keyframes popup {
+  from {opacity: 0;}
+  to {opacity: 1;}
 }
 
 
