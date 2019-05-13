@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Dropbox from "dropbox";
 import fetch from "isomorphic-fetch";
 import path from "./Path";
-
+import { favorite$ } from "../store/favoriteStore";
 import { getTime, bytesToSize } from "../utils";
 import {token$} from "../store/authToken"
 
