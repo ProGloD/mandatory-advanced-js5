@@ -45,7 +45,7 @@ function Home(props) {
         <Search cb={callback} />
         <Path />
         <ItemList files={files} />
-        {/* <AddFileButton updateFiles={getFiles} path={path} /> */}
+        <AddFileButton cb={callback} />
       </main>
     </>
   );

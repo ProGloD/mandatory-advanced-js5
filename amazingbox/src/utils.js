@@ -25,7 +25,30 @@ export function getFiles(cb) {
   dbx
     .filesListFolder({ path: path$.value })
     .then(response => cb(response.entries))
-    .catch(e => updateToken(null));
+    .catch(_ => updateToken(null));
+}
+
+export function createFolder(name, cb) {
+  let dbx = new Dropbox.Dropbox({ fetch, accessToken: token$.value });
+  dbx
+    .filesCreateFolder({
+      path: `${path$.value}/${name}`,
+      autorename: true
+    })
+    .then(_ => getFiles(cb))
+    .catch(error => console.log(error));
+}
+
+export function fileUpload(file, cb) {
+  let dbx = new Dropbox.Dropbox({ fetch, accessToken: token$.value });
+  dbx
+    .filesUpload({
+      path: `${path$.value}/${file.name}`,
+      contents: file,
+      autorename: true
+    })
+    .then(_ => getFiles(cb))
+    .catch(error => console.log(error));
 }
 
 export function search(cb, query) {
