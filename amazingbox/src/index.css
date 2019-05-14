@@ -244,16 +244,21 @@ tbody {
   background-color: transparent;
 }
 
-.modal__shadow__container {
-  position: fixed;
-  left: 250px;
-  top: 20px;
+.popUp-inputfield {
+  background-color: white;
+  height: 50px;
   width: 550px;
-  height: 35px;
+  border-radius: 5px;
+  padding-left: 10px;
+  position: relative;
+  box-shadow: 0 0 8px 1px grey;
+}
+
+.modal__shadow__container {
+  margin-top: -150px;
+  width: 630px;
+  height: 47px;
   font-size: 15px;
-  background-color: transparent;
-  border-bottom: 1px solid #888;
-  outline-color: aquamarine;
 }
 
 .modal__shadow__input {
@@ -261,7 +266,7 @@ tbody {
   font-size: 16px;
   margin-right: 10px;
   height: 30px;
-  width: 411px;
+  width: 475px;
   border: none;
   outline: none;
 }
