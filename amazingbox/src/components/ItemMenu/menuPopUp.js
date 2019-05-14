@@ -117,7 +117,7 @@ let PopUp = (props) => {
                     <button onClick={closePop} className="popUp-content-btn">&times;</button>
                     <div className="popUp-content-box">
                         <p>Are you sure you wanna copy this item?</p>
-                        <CopyFilesAndFolders path={props.path} file={props.file} updateFiles={props.updateFiles}></CopyFilesAndFolders>
+                        <CopyFilesAndFolders /*path={props.path}*/ file={props.file} /*updateFiles={props.updateFiles}*/></CopyFilesAndFolders>
                     </div>
                 </div>
             </div>

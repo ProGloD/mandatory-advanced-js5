@@ -1,7 +1,8 @@
+import React from "react";
 import Dropbox from "dropbox";
 import fetch from "isomorphic-fetch";
-
-import { token$ as accessToken, updateToken } from "./store/authToken";
+import { token$, updateToken } from "./store/authToken";
+import { path$ } from "./store/path";
 
 export function login() {
   let key = "kvms35pmp4vwz5n";
@@ -12,15 +13,45 @@ export function login() {
 }
 
 export function logout() {
-  let dbx = new Dropbox.Dropbox({ fetch, accessToken });
+  let dbx = new Dropbox.Dropbox({ fetch, accessToken: token$.value });
   dbx
     .authTokenRevoke()
     .then(_ => updateToken(null))
     .catch(error => console.log(error));
 }
 
-export function getFiles(path) {
-  let dbx = new Dropbox.Dropbox({ fetch, accessToken });
+export function getFiles(cb) {
+  let dbx = new Dropbox.Dropbox({ fetch, accessToken: token$.value });
+  dbx
+    .filesListFolder({ path: path$.value })
+    .then(response =>
+      cb(response.entries)
+    )
+    .catch(e =>
+      updateToken(null)
+    );
+}
+
+export function getThumbnail(cb, path) {
+  let dbx = new Dropbox.Dropbox({ fetch, accessToken: token$.value });
+  dbx
+    .filesGetThumbnail({path})
+    .then(response => {              
+       cb(<img className="thumbnail" src={window.URL.createObjectURL(response.fileBlob)} />);
+    })
+    .catch(_ => {
+        cb("photo");
+    });
+}
+
+export function download(path) {
+  let dbx = new Dropbox.Dropbox({ fetch, accessToken: token$.value });
+  dbx
+    .filesGetTemporaryLink({path})
+    .then(response => {
+        window.location.href = response.link;
+    })
+    .catch(error => console.log(error));
 }
 
 export function parseQueryString(str) {
@@ -36,7 +67,7 @@ export function parseQueryString(str) {
     return ret;
   }
 
-  str.split("&").forEach(function(param) {
+  str.split("&").forEach(function (param) {
     var parts = param.replace(/\+/g, " ").split("=");
     // Firefox (pre 40) decodes `%3D` to `=`
     // https://github.com/sindresorhus/query-string/pull/37
