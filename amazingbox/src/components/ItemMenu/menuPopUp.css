@@ -110,17 +110,14 @@
     font-weight: bold;
 }
 
-/* width */
 .move-ul::-webkit-scrollbar {
     width: 15px;
   }
   
-  /* Track */
 .move-ul::-webkit-scrollbar-track {
     background-color: initial;
   }
   
-  /* Handle */
   .move-ul::-webkit-scrollbar-thumb {
     background-image: linear-gradient(to right, #7af6d4, rgb(0, 255, 144));
     border-radius: 10px;

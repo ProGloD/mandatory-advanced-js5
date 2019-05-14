@@ -1,13 +1,12 @@
-import React, { useEffect, useState} from "react";
+import React, {useState} from "react";
 import "./menuPopUp.css";
-import {token$, updateToken} from "../../store/authToken";
+import {token$} from "../../store/authToken";
 import Dropbox from "dropbox";
 import fetch from "isomorphic-fetch";
 import CopyFilesAndFolders from "./copyFiles"
 
 
 let PopUp = (props) => {    
-        console.log(props.file);
     const [name, updateName] = useState(props.file.name); 
     const [files, updateFiles] = useState([]);
     const [errorMsg, updateErrorMsg] = useState("");
@@ -56,13 +55,16 @@ let PopUp = (props) => {
         })
     }
 
-    function checkPath(path) {
-        console.log(path);
-
-        return(
-            <p>hej</p>
-        )
-        
+    function checkPath(path) {  
+        if(path.path_lower !== path.name){
+            let splitPath = path.path_display.split(`${path.name}`);         
+            
+            return(
+                <>
+                  <p className="move-filePathLower">{splitPath}</p><p className="move-fileName">{path.name}</p>  
+                </>
+            )
+        }
     }
     
         if(props.sendId === "rename"){
@@ -88,10 +90,10 @@ let PopUp = (props) => {
                         <h4>{itemName}</h4>
                         <p>Select where to move item</p>
                         <ul className="move-ul">
-                            <li className="move-li" onClick={()=>move(`/${props.file.name}`)}>AmazingBox</li>
-                        {files.length === 0? getAllFiles() : files.map(file=>{
-                            return <li className="move-li" key={file.id} onClick={() => move(`${file.path_lower}/${props.file.name}`)}>{checkPath(file)}</li>
-                        })}
+                            <li className="move-li move-fileName" onClick={()=>move(`/${props.file.name}`)}>AmazingBox</li>
+                            {files.length === 0 ? getAllFiles() : files.map(file=>{
+                                return itemName === file.name ? null : <li className="move-li" key={file.id} onClick={() => move(`${file.path_lower}/${props.file.name}`)}>{checkPath(file)}</li>
+                            })}
                         </ul>
                     </div>
                 </div>
