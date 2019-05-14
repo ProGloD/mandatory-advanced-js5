@@ -1,14 +1,13 @@
 import { BehaviorSubject } from "rxjs";
 
-export const favorite$ = new BehaviorSubject(window.localStorage.getItem('favorite') ||
-  null);
+export const favorite$ = new BehaviorSubject(JSON.parse(window.localStorage.getItem('favorite') ||
+  '[]'));
 
 export function updateFavorite(newFavorite) {
   if (!newFavorite) {
     window.localStorage.removeItem('favorite');
   } else {
-      const favoriteArr = [...window.localStorage.getItem('favorite'), newFavorite]
-      window.localStorage.setItem('favorite', favoriteArr);
+      window.localStorage.setItem('favorite', JSON.stringify(newFavorite));
   }
 
   favorite$.next(newFavorite);

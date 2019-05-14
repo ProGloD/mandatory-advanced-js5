@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
-import Dropbox from "dropbox";
-import fetch from "isomorphic-fetch";
 import ItemList from "./itemList";
-import { token$, updateToken } from "../store/authToken";
+import { token$ } from "../store/authToken";
+import Logout from "./Logout";
 
-const Home = props => {
+
+function Home(props) {
   const [userToken, updateUserToken] = useState(token$.value);
 
   useEffect(() => {
@@ -18,27 +18,17 @@ const Home = props => {
     };
   }, []);
 
-  function logOut() {
-    let dbx = new Dropbox.Dropbox({ fetch, accessToken: userToken });
-    dbx
-      .authTokenRevoke()
-      .then(_ => updateToken(null))
-      .catch(error => console.log(error));
-  }
-
   if (!userToken) {
     return <Redirect to="/auth" />;
   }
 
   return (
     <>
-      <button className="logout-button" onClick={logOut}>
-        Log out
-      </button>
+      <Logout />
       <main>
         <ItemList location={props.location} />
       </main>
     </>
   );
-};
+}
 export default Home;
