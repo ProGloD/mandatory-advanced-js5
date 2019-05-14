@@ -35,8 +35,11 @@
 }
 
 .popUp-content-box {
+    box-sizing: border-box;
+    position: absolute;
+    width: 300px;
+    padding: 0 10px 10px 10px;
     top: 40px;
-    left: 20px;
     text-align: center;
 }
 
@@ -58,6 +61,8 @@
     text-transform: uppercase;
 }
 
+/*===================== STYLE MOVEDIV ======================= */
+
 
 .moveItemList{
     min-width: 110px;
@@ -70,4 +75,26 @@
 .moveItemList-option {
     border: none;
     margin-top: 20px;
+}
+
+.move-ul{
+    list-style: none;
+    margin: auto;
+    padding: 0;
+    overflow: auto;
+    height: 100px;
+    width: 250px;
+    cursor: pointer;
+}
+
+.move-li:hover {
+    background-color: blue;
+}
+
+.move-div > h4{
+    margin-top:0;
+}
+
+.move-filePathLower{
+    font-weight: bold;
 }

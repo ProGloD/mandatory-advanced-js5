@@ -36,9 +36,7 @@ let PopUp = (props) => {
             .filesListFolder({path: "", recursive: true})
                 .then(response=>{
                         let files = response.entries;
-                    updateFiles(files.filter(element => element[".tag"] === "folder").sort((a,b) => a.path_lower.localeCompare(b.path_lower)));
-                    console.log(files);
-                    
+                    updateFiles(files.filter(element => element[".tag"] === "folder").sort((a,b) => a.path_lower.localeCompare(b.path_lower)));                    
                 })
             .catch(error=>{
                 console.log(error);
@@ -77,11 +75,13 @@ let PopUp = (props) => {
             <div className="popUp">
                 <div className="popUp-content">
                     <button onClick={closePop} className="popUp-content-btn">&times;</button>
-                    <div className="popUp-content-box">
+                    <div className="popUp-content-box move-div">
+                        <h4>{itemName}</h4>
                         <p>Select where to move item</p>
-                        <ul>
+                        <ul className="move-ul">
+                            <li className="move-li" onClick={()=>move(`/${props.file.name}`)}>AmazingBox</li>
                         {files.length === 0? getAllFiles() : files.map(file=>{
-                                return <li key={file.id} onClick={() => move(`${file.path_lower}/${props.file.name}`)} >{file.name}</li>
+                            return <li className="move-li" key={file.id} onClick={() => move(`${file.path_lower}/${props.file.name}`)}><p className="move-filePathLower">{file.path_lower}</p></li>
                         })}
                         </ul>
                     </div>
