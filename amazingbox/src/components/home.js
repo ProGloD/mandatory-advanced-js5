@@ -14,7 +14,7 @@ function Home(props) {
   const [userToken, updateUserToken] = useState(token$.value);
   const [files, updateFiles] = useState([]);
 
-  function cb(files) {
+  function callback(files) {
     updateFiles(files);
   }
 
@@ -27,7 +27,7 @@ function Home(props) {
       props.location.pathname === "/" ? "" : props.location.pathname.slice(5);
     updatePath(path);
 
-    getFiles(cb);
+    getFiles(callback);
 
     return () => {
       subscriptionToken.unsubscribe();
@@ -42,7 +42,7 @@ function Home(props) {
     <>
       <Logout />
       <main>
-        {/* <Search cb={cb} /> */}
+        <Search cb={callback} />
         <Path />
         <ItemList files={files} />
         {/* <AddFileButton updateFiles={getFiles} path={path} /> */}

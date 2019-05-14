@@ -1,26 +1,19 @@
 import React, { useState, useEffect } from "react";
-import Dropbox from "dropbox";
-import fetch from "isomorphic-fetch";
 import { useDebounce } from "use-debounce";
 
-import { token$ } from "../store/authToken";
+import { getFiles, search } from "../utils";
 import "../css/Search.css";
 
 function Search(props) {
   const [query, updateQuery] = useState("");
   const [value] = useDebounce(query, 500);
+  const { cb } = props;
 
   useEffect(() => {
     if (value) {
-      let dbx = new Dropbox.Dropbox({ fetch, accessToken: token$.value });
-      dbx.filesSearch({ path: "", query }).then(response => {
-        const result = [];
-
-        response.matches.map(element => result.push(element.metadata));
-        props.updateFiles(result);
-      });
+      search(cb, value);
     } else {
-      props.getFiles();
+      getFiles(cb);
     }
   }, [value]);
 

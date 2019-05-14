@@ -28,7 +28,15 @@ export function getFiles(cb) {
     .catch(e => updateToken(null));
 }
 
-//export function search(cb, )
+export function search(cb, query) {
+  let dbx = new Dropbox.Dropbox({ fetch, accessToken: token$.value });
+  dbx.filesSearch({ path: "", query }).then(response => {
+    const result = [];
+
+    response.matches.map(element => result.push(element.metadata));
+    cb(result);
+  });
+}
 
 export function remove(path) {
   let dbx = new Dropbox.Dropbox({ fetch, accessToken: token$.value });
@@ -49,6 +57,7 @@ export function getThumbnail(cb, path) {
         <img
           className="thumbnail"
           src={window.URL.createObjectURL(response.fileBlob)}
+          alt=""
         />
       );
     })
