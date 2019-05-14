@@ -61,7 +61,7 @@ function Item(props) {
             <td className="td-size">{type !== "folder" ? bytesToSize(file.size) : null}</td>
             <td className="td-download material-icons">{type === "file" ? <span onClick={()=>download(file.path_lower)}>cloud_download</span> : null}</td>
             <td className="td-menuButton"><button onClick={() => !showMenu ? updateShowMenu(true) : updateShowMenu(false)} className="td-menuButton material-icons">more_horiz</button></td>
-            <td className="td-menu">{showMenu ? <ItemMenu file={file} path={props.path}  updateFiles={props.updateFiles} remove={props.remove}></ItemMenu> : null}</td>
+            <td className="td-menu">{showMenu ? <ItemMenu file={file}  updateFiles={props.updateFiles} remove={props.remove}></ItemMenu> : null}</td>
         </>
     );
 }

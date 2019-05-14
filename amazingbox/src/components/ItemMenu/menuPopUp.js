@@ -4,6 +4,7 @@ import {token$, updateToken} from "../../store/authToken";
 import Dropbox from "dropbox";
 import fetch from "isomorphic-fetch";
 import CopyFilesAndFolders from "./copyFiles"
+import {remove} from "../../utils";
 
 
 let PopUp = (props) => {    
@@ -104,7 +105,7 @@ let PopUp = (props) => {
                     <button onClick={closePop} className="popUp-content-btn">&times;</button>
                     <div className="popUp-content-box">
                         <p>Are you sure you wanna delete this item?</p>
-                        <button onClick={props.remove}>Yes</button>
+                        <button onClick={()=> remove(props.file.path_lower)}>Yes</button>
                         <button onClick={closePop}>Cancel</button>
                     </div>
                 </div>

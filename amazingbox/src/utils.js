@@ -32,6 +32,18 @@ export function getFiles(cb) {
     );
 }
 
+export function search(cb, )
+
+export function remove(path) {
+  let dbx = new Dropbox.Dropbox({ fetch, accessToken: token$.value});
+  dbx
+    .filesDelete({ path })
+    .then(_ => {
+      getFiles()
+    })
+    .catch(error => console.log(error));
+}
+
 export function getThumbnail(cb, path) {
   let dbx = new Dropbox.Dropbox({ fetch, accessToken: token$.value });
   dbx

@@ -17,7 +17,6 @@ function Search(props) {
         const result = [];
 
         response.matches.map(element => result.push(element.metadata));
-        console.log(result);
         props.updateFiles(result);
       });
     } else {

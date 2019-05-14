@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import ItemList from "./itemList";
 import Logout from "./Logout";
+import Search from "./Search";
+import Path from "./Path";
+import AddFileButton from "./addFileAndFolder";
+
 import {getFiles} from "../utils";
 import { updatePath } from "../store/path";
 import { token$ } from "../store/authToken";
@@ -9,6 +13,10 @@ import { token$ } from "../store/authToken";
 function Home(props) {
   const [userToken, updateUserToken] = useState(token$.value);
   const [files, updateFiles] = useState([]);
+
+  function cb(files){
+    updateFiles(files);
+  }
 
   useEffect(() => {
     let subscriptionToken = token$.subscribe(token => {
@@ -19,7 +27,7 @@ function Home(props) {
     props.location.pathname === "/" ? "" : props.location.pathname.slice(5);
     updatePath(path);
 
-    getFiles(files => updateFiles(files));
+    getFiles(cb);
     
   
     return () => {
@@ -35,7 +43,10 @@ function Home(props) {
     <>
       <Logout />
       <main>
+        {/* <Search cb={cb} /> */}
+        <Path />
         <ItemList files={files} />
+        {/* <AddFileButton updateFiles={getFiles} path={path} /> */}
       </main>
     </>
   );
