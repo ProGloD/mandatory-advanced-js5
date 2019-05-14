@@ -1,22 +1,38 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
-
-import Logout from "./Logout";
 import ItemList from "./itemList";
+import Logout from "./Logout";
+import Search from "./Search";
+import Path from "./Path";
+import AddFileButton from "./addFileAndFolder";
+
+import { getFiles } from "../utils";
+import { updatePath } from "../store/path";
 import { token$ } from "../store/authToken";
 
 function Home(props) {
   const [userToken, updateUserToken] = useState(token$.value);
+  const [files, updateFiles] = useState([]);
+
+  function cb(files) {
+    updateFiles(files);
+  }
 
   useEffect(() => {
-    let subscription = token$.subscribe(token => {
+    let subscriptionToken = token$.subscribe(token => {
       updateUserToken(token);
     });
 
+    const path =
+      props.location.pathname === "/" ? "" : props.location.pathname.slice(5);
+    updatePath(path);
+
+    getFiles(cb);
+
     return () => {
-      subscription.unsubscribe();
+      subscriptionToken.unsubscribe();
     };
-  }, []);
+  }, [props.location.pathname]);
 
   if (!userToken) {
     return <Redirect to="/auth" />;
@@ -26,7 +42,10 @@ function Home(props) {
     <>
       <Logout />
       <main>
-        <ItemList location={props.location} />
+        {/* <Search cb={cb} /> */}
+        <Path />
+        <ItemList files={files} />
+        {/* <AddFileButton updateFiles={getFiles} path={path} /> */}
       </main>
     </>
   );

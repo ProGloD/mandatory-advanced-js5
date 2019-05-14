@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Path(props) {
-  const path = props.path.split("/");
+import {path$} from "../store/path";
+
+function Path() {
+  const path = path$.value.split("/");
 
   return (
     <div className="path-list">

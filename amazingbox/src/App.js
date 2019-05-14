@@ -1,10 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Login from "./components/Login";
+import Login from "./components/login";
 import Home from "./components/home";
 import Favorites from "./components/favorites";
 import LoginDone from "./components/LoginDone";
 import "../src/components/ItemMenu/menuPopUp.css";
+import "./App.css";
 
 function App() {
   return (
