@@ -7,6 +7,7 @@ function ItemList(props) {
   return (
     <div className="ItemList">
       <table className="item-table" cellSpacing="0" cellPadding="0">
+      <Path path={path} />
         <thead>
           <tr className="head-row">
             <th/>

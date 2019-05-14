@@ -19,7 +19,6 @@ function ItemMenu(props) {
                 <button onClick={onClick} className="itemMenu-button opensecond" id="move" >Move</button>
                 <button onClick={onClick} className="itemMenu-button openthird" id="remove" >Remove</button>
                 <button onClick={onClick} className="itemMenu-button openfourth" id="copy" >Copy</button>
-
             </div>
             {showPop ? <ShowPop  file={props.file} path={props.path} showState={updateShowPop} /*updateFiles={props.updateFiles}*/ className="showPop" sendId={id} remove={props.remove} /> : null}
         </div>
