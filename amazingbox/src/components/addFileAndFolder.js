@@ -62,7 +62,7 @@ let AddFileButton = (props)=>{
             {state.showCreateFolder? 
             <div className="modal__shadow">
                 <div className="modal__shadow__container">
-                    <input className="modal__shadow__input" type="text" spellCheck="false" onChange={(e)=> {state.inputValue = e.target.value; console.log(state.inputValue)}} required></input>
+                    <input className="modal__shadow__input" type="text" spellCheck="false" onChange={(e)=> state.inputValue = e.target.value} value={state.inputValue} required></input>
                     <span className="modal__shadow__container__buttonBox">
                         <button className="modal__shadow__container__buttonBox__button" onClick={createFolder}>Create</button>
                         <button className="modal__shadow__container__buttonBox__button" onClick={()=>dispatch({type: "cancel_folder"})}>Cancel</button>

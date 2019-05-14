@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "chai": "^4.2.0",
     "dropbox": "^4.0.17",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.13.0",
