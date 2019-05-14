@@ -31,7 +31,7 @@ code {
   margin-left: 70px;
   position: relative;
   color: #000;
-  top: 4px;
+  top: 5px;
 }
 
 .favorites-text {
@@ -68,8 +68,8 @@ code {
 
 .add-menuContainer {
   position: fixed;
-  right: 70px;
-  bottom: 24px;
+  left: 3.5%;
+  bottom: 35px;
 }
 
 .add-icon {
@@ -80,10 +80,12 @@ code {
 }
 
 .add-popupMenu {
+  display: flex;
+  flex-direction: column-reverse;
   position: fixed;
-  flex-direction: row;
-  left: 150px;
-  top: 26px;
+  bottom: 32px;
+  margin-left: 5px;
+  left: 7%;
 }
 
 .add-fileButton, .add-folderButton {
@@ -96,7 +98,6 @@ code {
 
 .add-fileButton {
   position: fixed;
-  left: 157px;
   margin-bottom: 10px;
   margin-top: 0px;
   opacity: 0;
@@ -106,16 +107,14 @@ code {
 
 .add-folderButton {
   background-color: initial;
-  position: fixed;
-  margin-left: 5px;
+  margin-left: -12px;
+  padding-bottom: 5px;
   width: 20px;
-  top: 31px;
 }
 
 .path-list {
-  margin-bottom: -20px;
-  margin-top: 30px;
-  margin-left: 23px;
+  position: absolute;
+  top: -25px;
 }
 
 .path-list > a {
@@ -159,7 +158,13 @@ code {
 
 .th-name {
   position: relative;
+  padding-right: 67px;
   left: -50px;
+}
+
+.th-lastUpdate {
+  text-align: left;
+  padding-left: 44px;
 }
 
 tbody {
@@ -176,7 +181,7 @@ tbody {
 
 .td-type.material-icons {
   margin-left: 35px;
-  margin-top: 12px;
+  margin-top: 9px;
 }
 
 .thumbnail {
@@ -199,11 +204,12 @@ tbody {
 .td-download {
   cursor: pointer;
   position: absolute;
-  margin-top: 12px;
+  margin-top: 13px;
 }
 
 .td-name {
-  width: 315px;
+  max-width: 235px;
+  overflow: hidden;
   text-overflow: ellipsis;
 }
 
@@ -217,12 +223,16 @@ tbody {
   display: flex;
   justify-content: left;
   margin-left: 30px;
-  top: 10px;
+  top: 6px;
   width: 160px;
 }
 
 .td-size {
   padding-left: 60px;
+}
+
+.td-menu {
+  min-width: 250px;
 }
 
 .td-menuButton {
@@ -267,11 +277,8 @@ tbody {
 }
 
 .custom-file-label {
-  margin-top: 5px;
-}
-
-.openfirst {
-  animation: popup 0.2s ease;
+  margin-top: -5px;
+  margin-left: -4px;
 }
 
 .opensecond {

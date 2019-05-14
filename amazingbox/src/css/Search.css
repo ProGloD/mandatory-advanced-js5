@@ -5,14 +5,18 @@
   border-radius: 16px;
   border: 1px solid gray;
   background-color: white;
-  margin: 5px;
+  margin-top: 20px;
+  margin-left: 50%;
+  transform: translateX(-50%);
 }
 
 .search-bar__text-input {
+  width: 375px;
   border: none;
   padding: 8px;
   margin-left: 16px;
   border-right: 1px solid gray;
+  font-size: 15px;
   outline: none;
 }
 

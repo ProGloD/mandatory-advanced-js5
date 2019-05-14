@@ -58,6 +58,17 @@
     text-transform: uppercase;
 }
 
+.popUp-inputfield {
+    background-color: white;
+    height: 50px;
+    width: 550px;
+    border-radius: 5px;
+    padding-left: 10px;
+    position: relative;
+    transform: translate(-50%, -70%);
+    box-shadow: 0 0 8px 1px grey;
+}
+
 
 .moveItemList{
     min-width: 110px;

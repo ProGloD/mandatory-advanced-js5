@@ -53,8 +53,8 @@ function ItemList(props) {
   return (
     <div className="ItemList">
       <Search updateFiles={updateFiles} getFiles={getFiles} />
-      <Path path={path} />
       <table className="item-table" cellSpacing="0" cellPadding="0">
+      <Path path={path} />
         <thead>
           <tr className="head-row">
             <th className="th-type">Type</th>
