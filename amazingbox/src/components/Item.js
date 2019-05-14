@@ -34,8 +34,6 @@ function Item(props) {
     }, [file]);
 
     function getThumbnail(path) {
-        console.log("image");
-        console.log(path);
         dbx
           .filesGetThumbnail({path})
           .then(response => {              
@@ -60,14 +58,9 @@ function Item(props) {
     }
 
     function download() {
-        console.log("download");
-        console.log(path);
-        console.log(name);
-        
         dbx
           .filesGetTemporaryLink({path: `${file.path_lower}`})
           .then(response => {
-              console.log(response)
               window.location.href = response.link;
           })
           .catch(error => console.log(error));
@@ -84,10 +77,6 @@ function Item(props) {
 
         updateFavorite(newFavorite);
     }
-
-    
-    console.log(favorite.length);
-
     return (
         <>
             <button className="favorite-Button material-icons" onClick={addFavorite}>{ favorite && favorite.find(x => x.id === file.id) ? "star" : "star_border"}</button>

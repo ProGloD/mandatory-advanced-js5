@@ -55,6 +55,15 @@ let PopUp = (props) => {
         updateErrorMsg(error)
         })
     }
+
+    function checkPath(path) {
+        console.log(path);
+
+        return(
+            <p>hej</p>
+        )
+        
+    }
     
         if(props.sendId === "rename"){
             return(
@@ -81,7 +90,7 @@ let PopUp = (props) => {
                         <ul className="move-ul">
                             <li className="move-li" onClick={()=>move(`/${props.file.name}`)}>AmazingBox</li>
                         {files.length === 0? getAllFiles() : files.map(file=>{
-                            return <li className="move-li" key={file.id} onClick={() => move(`${file.path_lower}/${props.file.name}`)}><p className="move-filePathLower">{file.path_lower}</p></li>
+                            return <li className="move-li" key={file.id} onClick={() => move(`${file.path_lower}/${props.file.name}`)}>{checkPath(file)}</li>
                         })}
                         </ul>
                     </div>
