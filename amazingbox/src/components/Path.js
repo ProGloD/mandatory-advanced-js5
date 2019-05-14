@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import {path$} from "../store/path";
+import { path$ } from "../store/path";
+import "../css/Path.css";
 
 function Path() {
   const path = path$.value.split("/");
@@ -19,7 +20,10 @@ function Path() {
           );
         } else {
           return (
-            <Link key={way} to={`/home${way}`}> &gt; {element}</Link>
+            <Link key={way} to={`/home${way}`}>
+              {" "}
+              &gt; {element}
+            </Link>
           );
         }
       })}
