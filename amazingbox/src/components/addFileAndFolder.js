@@ -2,7 +2,6 @@ import React, {useReducer, useState} from "react";
 import Dropbox from "dropbox";
 import fetch from "isomorphic-fetch";
 import { token$, updateToken } from "../store/authToken";
-//import closePop from "../components/ItemMenu/menuPopUp";
 import "../components/ItemMenu/menuPopUp.css";
 
 function reducer(state, action){
@@ -33,29 +32,27 @@ function reducer(state, action){
 
 
 let AddFileButton = (props)=>{
-    const [state, dispatch] = useReducer(reducer, {showMenu: false, showCreateFolder: false, inputValue: ""});
-    const [userToken, updateUserToken] = useState(token$.value); 
-    
-    let dbx = new Dropbox.Dropbox({ fetch, accessToken: userToken });
+    const [state, dispatch] = useReducer(reducer, {showMenu: false, showCreateFolder: false, inputValue: ""}); 
+    let dbx = new Dropbox.Dropbox({ fetch, accessToken: token$ });
 
     function onFileChange(e){ //flytta till reducer
         let array = Array.from(e.target.files)
         for(let file of array){
             dbx
             .filesUpload({path: `${props.path}/${file.name}`, contents: file})
-                .then((response)=>{
-                    console.log(response);
-                    props.updateFiles();
-                }) 
+                .then(_=>props.updateFiles())
+                .catch(_=>{
+                    //error
+                })
         }
     }
 
     function createFolder(){ //flytta till reducer, får fel i reducer, kolla med andreas
         dbx
         .filesCreateFolder({path: `${props.path}/${state.inputValue}`, autorename: true}) //add folder name 
-            .then((response)=>{
-                console.log(response);
-                props.updateFiles();
+            .then(_=>props.updateFiles())
+            .catch(_=>{
+                //error
             })
     }
 
@@ -68,7 +65,6 @@ let AddFileButton = (props)=>{
         <div className="add-menuContainer">
         {state.showCreateFolder ? 
         <div className="popUp">
-            
                 <div className="popUp-inputfield modal__shadow__container">
                     <input className="modal__shadow__input" type="text" spellCheck="false" onChange={(e)=> state.inputValue = e.target.value} value={state.inputValue} required></input>
                     <span className="modal__shadow__container__buttonBox">

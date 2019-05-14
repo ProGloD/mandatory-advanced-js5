@@ -5,6 +5,7 @@ import Home from "./components/home";
 import Favorites from "./components/favorites";
 import LoginDone from "./components/loginDone";
 import "../src/components/ItemMenu/menuPopUp.css";
+import "./App.css"
 
 function App() {
   return (
