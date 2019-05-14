@@ -1,7 +1,7 @@
 import React, {useReducer, useState} from "react";
 import Dropbox from "dropbox";
 import fetch from "isomorphic-fetch";
-import { token$, updateToken } from "../store/authToken";
+import { token$} from "../store/authToken";
 
 function reducer(state, action){
     switch(action.type){
@@ -31,29 +31,27 @@ function reducer(state, action){
 
 
 let AddFileButton = (props)=>{
-    const [state, dispatch] = useReducer(reducer, {showMenu: false, showCreateFolder: false, inputValue: ""});
-    const [userToken, updateUserToken] = useState(token$.value); 
-    
-    let dbx = new Dropbox.Dropbox({ fetch, accessToken: userToken });
+    const [state, dispatch] = useReducer(reducer, {showMenu: false, showCreateFolder: false, inputValue: ""}); 
+    let dbx = new Dropbox.Dropbox({ fetch, accessToken: token$ });
 
     function onFileChange(e){ //flytta till reducer
         let array = Array.from(e.target.files)
         for(let file of array){
             dbx
             .filesUpload({path: `${props.path}/${file.name}`, contents: file})
-                .then((response)=>{
-                    console.log(response);
-                    props.updateFiles();
-                }) 
+                .then(_=>props.updateFiles())
+                .catch(_=>{
+                    //error
+                })
         }
     }
 
     function createFolder(){ //flytta till reducer, får fel i reducer, kolla med andreas
         dbx
         .filesCreateFolder({path: `${props.path}/${state.inputValue}`, autorename: true}) //add folder name 
-            .then((response)=>{
-                console.log(response);
-                props.updateFiles();
+            .then(_=>props.updateFiles())
+            .catch(_=>{
+                //error
             })
     }
 
@@ -62,7 +60,7 @@ let AddFileButton = (props)=>{
             {state.showCreateFolder? 
             <div className="modal__shadow">
                 <div className="modal__shadow__container">
-                    <input className="modal__shadow__input" type="text" spellCheck="false" onChange={(e)=> state.inputValue = e.target.value} value={state.inputValue} required></input>
+                    <input className="modal__shadow__input" type="text" spellCheck="false" onChange={(e)=> state.inputValue = e.target.value}  required></input>
                     <span className="modal__shadow__container__buttonBox">
                         <button className="modal__shadow__container__buttonBox__button" onClick={createFolder}>Create</button>
                         <button className="modal__shadow__container__buttonBox__button" onClick={()=>dispatch({type: "cancel_folder"})}>Cancel</button>
