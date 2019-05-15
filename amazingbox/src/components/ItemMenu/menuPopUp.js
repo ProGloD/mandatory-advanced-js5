@@ -4,25 +4,26 @@ import {token$} from "../../store/authToken";
 import Dropbox from "dropbox";
 import fetch from "isomorphic-fetch";
 import CopyFilesAndFolders from "./copyFiles"
-import {remove} from "../../utils";
+import {remove, getFiles} from "../../utils";
 
 
 let PopUp = (props) => {    
+    console.log(props)
     const [name, updateName] = useState(props.file.name); 
     const [files, updateFiles] = useState([]);
     const [errorMsg, updateErrorMsg] = useState("");
     let itemName = props.file.name; 
-    let dbx = new Dropbox.Dropbox({ fetch, accessToken: token$.value});
+    let dbx = new Dropbox.Dropbox({ fetch, accessToken: token$.value}); // taborrt sen när alla functioner är borta 
     
-    function closePop() {
+    function closePop() { //stäner popup-rutan när kommandot är klart
         props.showState(false)
     }
 
-    function rename(e){
+    function rename(e){ //sparar värdet från inputet för rename
         updateName(e.target.value);
     }
 
-    function move(toPath){
+    function move(toPath){ //SKA FLYTTAS TILL UTILS
         console.log(`FROM: ${props.file.path_lower}`,`TO:${toPath}`);
         
         dbx
@@ -31,7 +32,7 @@ let PopUp = (props) => {
         .catch(error => console.log(error));
     }
 
-    function getAllFiles(){
+    function getAllFiles(){ //SKA FLYTTAS TILL UTILS
         dbx
             .filesListFolder({path: "", recursive: true})
                 .then(response=>{
@@ -44,7 +45,7 @@ let PopUp = (props) => {
     }
 
 
-    function submitRename(event){
+    function submitRename(event){ //SKA FLYTTAS TILL UTILS
         event.preventDefault();        
         dbx
         .filesMove({from_path: `${props.file.path_lower}`, to_path: `${props.path}/${name}`})
@@ -56,7 +57,7 @@ let PopUp = (props) => {
         })
     }
 
-    function checkPath(path) {  
+    function checkPath(path) {  //förfinar displayen av alla move-alternativen, behövs ens denna längre?
         if(path.path_lower !== path.name){
             let splitPath = path.path_display.split(`${path.name}`);         
             
@@ -101,13 +102,18 @@ let PopUp = (props) => {
             </div>
         ) 
     }else if(props.sendId === "remove"){
+        
+            function cbGetFiles(newFiles){ //används för att uppdatera files efter remove
+                props.updateFiles(newFiles)
+            }
+      
         return(
             <div className="popUp">
                 <div className="popUp-content">
                     <button onClick={closePop} className="popUp-content-btn">&times;</button>
                     <div className="popUp-content-box">
                         <p>Are you sure you wanna delete this item?</p>
-                        <button onClick={()=> remove(props.file.path_lower)}>Yes</button>
+                        <button onClick={()=> remove(cbGetFiles, getFiles, props.file.path_lower)}>Yes</button>
                         <button onClick={closePop}>Cancel</button>
                     </div>
                 </div>
@@ -120,7 +126,7 @@ let PopUp = (props) => {
                     <button onClick={closePop} className="popUp-content-btn">&times;</button>
                     <div className="popUp-content-box">
                         <p>Are you sure you wanna copy this item?</p>
-                        <CopyFilesAndFolders /*path={props.path}*/ file={props.file} /*updateFiles={props.updateFiles}*/></CopyFilesAndFolders>
+                        <CopyFilesAndFolders file={props.file} /*updateFiles={props.updateFiles}*/></CopyFilesAndFolders>
                     </div>
                 </div>
             </div>

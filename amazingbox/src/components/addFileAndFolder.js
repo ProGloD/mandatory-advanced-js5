@@ -36,9 +36,9 @@ let AddFileButton = (props)=>{
     const [state, dispatch] = useReducer(reducer, {showMenu: false, showCreateFolder: false, inputValue: ""});
     const [userToken, updateUserToken] = useState(token$.value); 
     
-    let dbx = new Dropbox.Dropbox({ fetch, accessToken: userToken });
+    let dbx = new Dropbox.Dropbox({ fetch, accessToken: userToken }); //tabort sen när allt är flyttat
 
-    function onFileChange(e){ //flytta till reducer
+    function onFileChange(e){ //flytta till UTIls
         let array = Array.from(e.target.files)
         for(let file of array){
             dbx
@@ -50,7 +50,7 @@ let AddFileButton = (props)=>{
         }
     }
 
-    function createFolder(){ //flytta till reducer, får fel i reducer, kolla med andreas
+    function createFolder(){  //flytta till UTIls
         dbx
         .filesCreateFolder({path: `${props.path}/${state.inputValue}`, autorename: true}) //add folder name 
             .then((response)=>{

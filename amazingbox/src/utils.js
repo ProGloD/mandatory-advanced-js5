@@ -21,6 +21,7 @@ export function logout() {
 }
 
 export function getFiles(cb) {
+  console.log(cb);
   let dbx = new Dropbox.Dropbox({ fetch, accessToken: token$.value });
   dbx
     .filesListFolder({ path: path$.value })
@@ -32,15 +33,14 @@ export function getFiles(cb) {
     );
 }
 
-export function search(cb, )
+//export function search(cb, )
 
-export function remove(path) {
+export function remove(cbGetFiles,  path) {
   let dbx = new Dropbox.Dropbox({ fetch, accessToken: token$.value});
   dbx
     .filesDelete({ path })
-    .then(_ => {
-      getFiles()
-    })
+    .then(_ => getFiles(cbGetFiles)
+    )
     .catch(error => console.log(error));
 }
 

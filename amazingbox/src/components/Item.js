@@ -12,7 +12,7 @@ function Item(props) {
     const file = props.file;
     const type = file[".tag"];
 
-    useEffect(() => {
+    useEffect(() => { //här håller useEffect koll på våra filer. Den koller vilken sorts fil det är.
         let subscription = favorite$.subscribe(favorite => {
             updateUserFavorite(favorite);
         });
@@ -29,7 +29,7 @@ function Item(props) {
     }, [file]);
 
  
-    function checkIfImage(fileName) {
+    function checkIfImage(fileName) { //function för att koll fil-typ
         let names = fileName.split(".");
         let format = names[names.length - 1 ];
         if (format === "png" || format === "jpg" || format === "jpeg" || format === "tiff" || format === "tif" || format === "gif" || format === "bmp") {
@@ -61,7 +61,7 @@ function Item(props) {
             <td className="td-size">{type !== "folder" ? bytesToSize(file.size) : null}</td>
             <td className="td-download material-icons">{type === "file" ? <span onClick={()=>download(file.path_lower)}>cloud_download</span> : null}</td>
             <td className="td-menuButton"><button onClick={() => !showMenu ? updateShowMenu(true) : updateShowMenu(false)} className="td-menuButton material-icons">more_horiz</button></td>
-            <td className="td-menu">{showMenu ? <ItemMenu file={file}  updateFiles={props.updateFiles} remove={props.remove}></ItemMenu> : null}</td>
+            <td className="td-menu">{showMenu ? <ItemMenu file={file}  updateFiles={props.updateFiles}></ItemMenu> : null}</td>
         </>
     );
 }

@@ -12,13 +12,13 @@ import { token$ } from "../store/authToken";
 
 function Home(props) {
   const [userToken, updateUserToken] = useState(token$.value);
-  const [files, updateFiles] = useState([]);
+  const [files, updateFiles] = useState([]); //antingen måste vi skicka ner denna staten som prop eller store. Alla api-anrop behöver state
 
-  function cb(files){
-    updateFiles(files);
+  function cb(newFiles){ //måste använda en callback för att uppdatera filerna. annars får vi fel pga updatefiles körs innan den fått en response från api:et
+    updateFiles(newFiles);
   }
 
-  useEffect(() => {
+  useEffect(() => { // håller koll på om url:n har bytt adress, uppdaterar isåfall med nya filer för just den andressen 
     let subscriptionToken = token$.subscribe(token => {
       updateUserToken(token);
     });
@@ -33,10 +33,10 @@ function Home(props) {
     return () => {
       subscriptionToken.unsubscribe();
     };
-  }, [props.location.pathname]);
+  }, [props.location.pathname]); //vad useEffect håller koll på
 
   if (!userToken) {
-    return <Redirect to="/auth" />;
+    return <Redirect to="/auth" />; //om usertoken är false returneras vi till home.
   }
 
   return (
@@ -45,7 +45,7 @@ function Home(props) {
       <main>
         {/* <Search cb={cb} /> */}
         <Path />
-        <ItemList files={files} />
+        <ItemList files={files} updateFiles={updateFiles} />
         {/* <AddFileButton updateFiles={getFiles} path={path} /> */}
       </main>
     </>

@@ -3,12 +3,12 @@ import "./itemMenu.css";
 import ShowPop from "./menuPopUp"
 
 function ItemMenu(props) {            
-    const [id, upDateId] = useState('');
+    const [id, upDateId] = useState(''); //skickar med id:et för den knappen du tryckt på nere på rad 23ish
     const [showPop, updateShowPop] = useState(false);
     
     function onClick(e) {
         upDateId(e.target.id);
-        !showPop ? updateShowPop(true) : updateShowPop(false)        
+        !showPop ? updateShowPop(true) : updateShowPop(false)     //function som ändrar state för en popup-ruta   
     }
     
 
@@ -20,7 +20,7 @@ function ItemMenu(props) {
                 <button onClick={onClick} className="itemMenu-button openthird" id="remove" >Remove</button>
                 <button onClick={onClick} className="itemMenu-button openfourth" id="copy" >Copy</button>
             </div>
-            {showPop ? <ShowPop  file={props.file} path={props.path} showState={updateShowPop} /*updateFiles={props.updateFiles}*/ className="showPop" sendId={id} remove={props.remove} /> : null}
+            {showPop ? <ShowPop  file={props.file} updateFiles={props.updateFiles} showState={updateShowPop}  className="showPop" sendId={id} /> : null}  
         </div>
 
     )  
