@@ -6,6 +6,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: no-repeat center center fixed;
+  background-image: url();
+  background-size: cover;
+  height: 100vh;
 }
 
 code {
@@ -24,7 +28,7 @@ code {
 .home-icon {
   padding-left: 20px;
   color: black;
-} 
+}
 
 .favorites {
   text-decoration: none;
@@ -47,6 +51,15 @@ code {
   font-size: 29px;
 }
 
+.search-icon {
+  position: absolute;
+  top: 33px;
+  left: 255px;
+  font-size: 25px;
+  text-decoration: none;
+  color: #000;
+}
+
 .logout-button {
   position: absolute;
   top: 35px;
@@ -56,13 +69,13 @@ code {
   border-radius: 30px;
   font-size: 13px;
   font-weight: 700;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   background-image: linear-gradient(to right, #7af6d4, rgb(0, 255, 144));
   outline: none;
   border: none;
   cursor: pointer;
   color: #fff;
-  transition: .2s ease;
+  transition: 0.2s ease;
   text-transform: uppercase;
 }
 
@@ -88,7 +101,8 @@ code {
   left: 7%;
 }
 
-.add-fileButton, .add-folderButton {
+.add-fileButton,
+.add-folderButton {
   display: inline-block;
   width: 100px;
   border: none;
@@ -98,7 +112,7 @@ code {
 
 .add-fileButton {
   position: fixed;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   margin-top: 0px;
   opacity: 0;
   z-index: 2000;
@@ -108,23 +122,8 @@ code {
 .add-folderButton {
   background-color: initial;
   margin-left: -12px;
-  padding-bottom: 5px;
+  padding-bottom: 15px;
   width: 20px;
-}
-
-.path-list {
-  position: absolute;
-  top: -25px;
-}
-
-.path-list > a {
-  text-decoration: none;
-  font-size: 17px;
-  color: #000;
-}
-
-.path-list > a:first-child {
-  text-transform: uppercase;
 }
 
 .item-table {
@@ -150,21 +149,28 @@ code {
   top: 176px;
 }
 
-.th-type, .th-name, .th-lastUpdate, .th-size {
+.th-type,
+.th-name,
+.th-lastUpdate,
+.th-size {
   width: 170px;
   font-size: 20px;
   font-weight: 700;
 }
 
+.th-type {
+  width: 95px;
+}
+
 .th-name {
   position: relative;
-  padding-right: 67px;
-  left: -50px;
+  padding-right: 136px;
+  left: 2px;
 }
 
 .th-lastUpdate {
   text-align: left;
-  padding-left: 44px;
+  padding-left: 35px;
 }
 
 tbody {
@@ -181,7 +187,7 @@ tbody {
 
 .td-type.material-icons {
   margin-left: 35px;
-  margin-top: 9px;
+  margin-top: 12px;
 }
 
 .thumbnail {
@@ -197,7 +203,6 @@ tbody {
   border: none;
   outline: none;
   position: relative;
-  top: 12px;
   left: 10px;
 }
 
@@ -211,6 +216,7 @@ tbody {
   max-width: 235px;
   overflow: hidden;
   text-overflow: ellipsis;
+  padding-left: 60px;
 }
 
 .td-name > a {
@@ -223,7 +229,7 @@ tbody {
   display: flex;
   justify-content: left;
   margin-left: 30px;
-  top: 6px;
+  top: 8px;
   width: 160px;
 }
 
@@ -291,11 +297,10 @@ tbody {
 }
 
 @keyframes popup {
-  from {opacity: 0;}
-  to {opacity: 1;}
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
-
-
-
-
-

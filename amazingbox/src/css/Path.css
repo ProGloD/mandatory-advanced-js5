@@ -1,0 +1,13 @@
+.path-list {
+  margin: 10px;
+}
+
+.path-list > a {
+  text-decoration: none;
+  font-size: 17px;
+  color: #000;
+}
+
+.path-list > a:first-child {
+  text-transform: uppercase;
+}

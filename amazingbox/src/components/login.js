@@ -3,6 +3,8 @@ import { Redirect } from "react-router-dom";
 import "../css/login.css"
 import { login } from "../utils";
 import { token$ } from "../store/authToken";
+import { Helmet } from "react-helmet";
+
 
 function Login() {
   if (token$.value) {
@@ -13,11 +15,14 @@ function Login() {
 
   return (
     <div className="login">
-              <img
-            src="/images/Dropbox_Windows.png"
-            width={24}
-            alt="Dropbox Logo"
-          />
+      <Helmet>
+        <title>Login</title>
+      </Helmet>
+      <img
+        src="https://www.mktv.mx/wp-content/uploads/2017/07/letter_sending.gif"
+        width={400}
+        alt="Dropbox Logo"
+      />
       <a href={auth} className="login_link">
         <button className="login_link_button">
           Login using Dropbox{" "}

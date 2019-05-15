@@ -19,9 +19,8 @@
 .login_link_button:hover{
     cursor: pointer;
     color: rgb(0, 140, 255);
+    text-decoration: underline;
 }
-
-
 
 .login_link{
     width: 45%;
@@ -29,4 +28,5 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    text-decoration: none;
 }

@@ -1,35 +1,21 @@
 import React, { useState, useEffect } from "react";
-import Dropbox from "dropbox";
-import fetch from "isomorphic-fetch";
+import {Redirect} from "react-router-dom";
 import { useDebounce } from "use-debounce";
 
-import { token$ } from "../store/authToken";
+import { getFiles, search } from "../utils";
 import "../css/Search.css";
 
 function Search(props) {
   const [query, updateQuery] = useState("");
   const [value] = useDebounce(query, 500);
+  const { cb } = props;
 
   useEffect(() => {
-    if (value) {
-      let dbx = new Dropbox.Dropbox({ fetch, accessToken: token$.value });
-      dbx.filesSearch({ path: "", query }).then(response => {
-        const result = [];
-
-        response.matches.map(element => result.push(element.metadata));
-        props.updateFiles(result);
-      });
-    } else {
-      props.getFiles();
-    }
+    search(cb, value);
   }, [value]);
 
   function handleChange(event) {
     updateQuery(event.target.value);
-  }
-
-  function cleanQuery() {
-    updateQuery("");
   }
 
   return (
@@ -40,7 +26,7 @@ function Search(props) {
         placeholder="Search"
         value={query}
       />
-      <button className="search-bar__clear-button" onClick={cleanQuery}>
+      <button className="search-bar__clear-button" onClick={() => <Redirect to="/" />}>
         &times;
       </button>
     </div>

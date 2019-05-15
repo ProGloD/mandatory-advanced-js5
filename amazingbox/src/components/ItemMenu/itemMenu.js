@@ -1,13 +1,13 @@
 import React, {useState} from "react";
-import "./itemMenu.css";
-import ShowPop from "./menuPopUp"
+import "../../css/itemMenu.css";
+import PopUp from "./popUp"
 
 function ItemMenu(props) {            
     const [id, upDateId] = useState(''); //skickar med id:et för den knappen du tryckt på nere på rad 23ish
     const [showPop, updateShowPop] = useState(false);
     
-    function onClick(e) {
-        upDateId(e.target.id);
+    function onClick(event) {
+        upDateId(event.target.id);
         !showPop ? updateShowPop(true) : updateShowPop(false)     //function som ändrar state för en popup-ruta   
     }
     
@@ -20,9 +20,8 @@ function ItemMenu(props) {
                 <button onClick={onClick} className="itemMenu-button openthird" id="remove" >Remove</button>
                 <button onClick={onClick} className="itemMenu-button openfourth" id="copy" >Copy</button>
             </div>
-            {showPop ? <ShowPop  file={props.file} updateFiles={props.updateFiles} showState={updateShowPop}  className="showPop" sendId={id} /> : null}  
+            {showPop ? <PopUp className="showPop" file={props.file} cb={props.cb} showState={updateShowPop} sendId={id} /> : null}  
         </div>
-
     )  
 }
 

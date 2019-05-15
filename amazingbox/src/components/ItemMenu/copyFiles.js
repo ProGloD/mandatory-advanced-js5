@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Dropbox from "dropbox";
 import fetch from "isomorphic-fetch";
 import { token$ } from "../../store/authToken";
-import "./copyFiles.css";
+import "../../css/copyFiles.css";
 
 const CopyFilesAndFolders = props => {
   const [userToken, updateUserToken] = useState(token$.value);

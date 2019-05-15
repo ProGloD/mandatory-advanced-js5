@@ -1,11 +1,13 @@
 .search-bar {
+  position: absolute;
+  top: 0;
   box-sizing: border-box;
   width: fit-content;
   font-size: 16px;
   border-radius: 16px;
   border: 1px solid gray;
   background-color: white;
-  margin-top: 20px;
+  margin-top: 25px;
   margin-left: 50%;
   transform: translateX(-50%);
 }
