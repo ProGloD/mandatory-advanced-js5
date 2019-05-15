@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {Redirect} from "react-router-dom";
+import {Link} from "react-router-dom";
 import { useDebounce } from "use-debounce";
 
 import { getFiles, search } from "../utils";
@@ -26,9 +26,11 @@ function Search(props) {
         placeholder="Search"
         value={query}
       />
-      <button className="search-bar__clear-button" onClick={() => <Redirect to="/" />}>
+      <Link to="/">
+        <button className="search-bar__clear-button">
         &times;
-      </button>
+        </button>
+      </Link>
     </div>
   );
 }
