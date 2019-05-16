@@ -36,6 +36,7 @@ function App() {
             <i className="favorites-icon material-icons">star</i>{" "}
             <span className="favorites-text">Favorites</span>
           </Link>
+          {/*<span>amazingbox.</span>*/}
         </header>
       }
         <Route exact path="/" component={Home} />
@@ -44,7 +45,7 @@ function App() {
         <Route path="/search" component={SearchView} />
         <Route path="/auth" component={Login} />
         <Route path="/auth-done" component={LoginDone} />
-      </div>
+        </div>
     </Router>
   );
 }

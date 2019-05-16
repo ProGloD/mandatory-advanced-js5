@@ -60,6 +60,14 @@ code {
   color: #000;
 }
 
+.app-title {
+  position: absolute;
+  right: 220px;
+  font-size: 30px;
+  line-height: 90px;
+  letter-spacing: -2px;
+}
+
 .logout-button {
   position: absolute;
   top: 35px;
