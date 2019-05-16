@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-
-import ItemMenu from "../components/ItemMenu/itemMenu";
+import ItemMenu from "./ItemMenu/ItemMenu";
 import { Link } from "react-router-dom";
 import { favorite$, updateFavorite } from "../store/favoriteStore";
 import { getTime, bytesToSize, getThumbnail, download } from "../utils";

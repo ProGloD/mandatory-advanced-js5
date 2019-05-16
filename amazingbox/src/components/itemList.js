@@ -1,21 +1,22 @@
 import React from "react";
-
 import Item from "./Item";
-import { favorite$, updateFavorite } from "../store/favoriteStore";
 
 function ItemList(props) {
   const { files, cb } = props;
+
 
   return (
     <div className="ItemList">
       <table className="item-table" cellSpacing="0" cellPadding="0">
         <thead>
           <tr className="head-row">
-            <th />
+            <th className="th-empty"></th>
             <th className="th-type">Type</th>
             <th className="th-name">Name</th>
             <th className="th-lastUpdate">Last Updated</th>
             <th className="th-size">Size</th>
+            <th className="th-empty2"></th>
+            <th className="th-empty3"></th>
           </tr>
         </thead>
         <tbody>

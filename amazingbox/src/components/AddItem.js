@@ -1,5 +1,4 @@
-import React, { useReducer, useState } from "react";
-
+import React, { useReducer } from "react";
 import { fileUpload, createFolder } from "../utils";
 //import closePop from "../components/ItemMenu/menuPopUp";
 import "../components/ItemMenu/menuPopUp.css";
@@ -27,6 +26,10 @@ function reducer(state, action) {
         showCreateFolder: false,
         inputValue: ""
       };
+
+    default:
+      console.log("ITS BROKEN!");
+      return;
   }
 }
 

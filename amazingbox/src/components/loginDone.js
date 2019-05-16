@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
-
 import { token$, updateToken } from "../store/authToken";
 import { parseQueryString } from "../utils";
 

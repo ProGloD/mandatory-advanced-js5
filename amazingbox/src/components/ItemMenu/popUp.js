@@ -1,9 +1,4 @@
 import React, {useState} from "react";
-
-import {token$} from "../../store/authToken";
-import Dropbox from "dropbox";
-import fetch from "isomorphic-fetch";
-import CopyFilesAndFolders from "./copyFiles"
 import {remove, getAllFiles, move, submitRename, copyTarget} from "../../utils";
 import "./menuPopUp.css";
 import {path$} from "../../store/path";
@@ -13,7 +8,6 @@ function PopUp(props) {
     const [folders, updateFolders] = useState(null);
     const {file, cb, showState} = props;
     const [errorMsg, updateErrorMsg] = useState("");
-    // let itemName = props.file.name; 
     
      function closePop() { //stäner popup-rutan när kommandot är klart
          showState(false)
@@ -46,8 +40,10 @@ function PopUp(props) {
                      <button onClick={closePop} className="popUp-content-btn">&times;</button>
                      <form onSubmit={(event) =>{
                         event.preventDefault();
-                         submitRename(file.path_lower, `${path$.value}/${name}`, cb, updateErrorMsg)}
-                         } className="popUp-content-box">
+                        submitRename(file.path_lower, `${path$.value}/${name}`, cb, updateErrorMsg);
+                        closePop();
+                        }}
+                         className="popUp-content-box">
                          {errorMsg ? <p style={{color: "red"}}>Filename has already been taken</p> : <p>Rename item</p>}
                          <p>{file.name}</p>
                          <input onChange={rename} placeholder="New name"/>
