@@ -3,6 +3,7 @@ import Dropbox from "dropbox";
 import fetch from "isomorphic-fetch";
 import { token$, updateToken } from "./store/authToken";
 import { path$ } from "./store/path";
+import { favorite$, updateFavorite } from "./store/favoriteStore";
 
 export function login() {
   let key = "kvms35pmp4vwz5n";
@@ -21,38 +22,52 @@ export function logout() {
 }
 
 export function getFiles(cb) {
+  let path = window.location.pathname;
+
   let dbx = new Dropbox.Dropbox({ fetch, accessToken: token$.value });
   dbx
     .filesListFolder({ path: path$.value })
-    .then(response => cb(response.entries))
+    .then(response => {
+      if (path === window.location.pathname) {
+        cb(response.entries);
+      }
+    })
     .catch(_ => updateToken(null));
 }
 
-export function getAllFiles(updateFiles){ 
+export function getAllFiles(updateFiles) {
   let dbx = new Dropbox.Dropbox({ fetch, accessToken: token$.value });
   dbx
-      .filesListFolder({path: "", recursive: true})
-          .then(response=>{
-              let files = response.entries;
-              updateFiles(files.filter(element => element[".tag"] === "folder").sort((a,b) => a.path_lower.localeCompare(b.path_lower)));              
-          })
-      .catch(error=>{
-          console.log(error);
-      })
+    .filesListFolder({ path: "", recursive: true })
+    .then(response => {
+      let files = response.entries;
+      updateFiles(files.filter(element => element[".tag"] === "folder").sort((a, b) => a.path_lower.localeCompare(b.path_lower)));
+    })
+    .catch(error =>
+      console.log(error)
+    );
 }
 
 export function createFolder(name, cb) {
+  let path = window.location.pathname;
+
   let dbx = new Dropbox.Dropbox({ fetch, accessToken: token$.value });
   dbx
     .filesCreateFolder({
       path: `${path$.value}/${name}`,
       autorename: true
     })
-    .then(_ => getFiles(cb))
+    .then(_ => {
+      if (path === path$.value) {
+        getFiles(cb);
+      }
+    })
     .catch(error => console.log(error));
 }
 
 export function fileUpload(file, cb) {
+  let path = window.location.pathname === "/" ? "" : window.location.pathname.slice(5);
+
   let dbx = new Dropbox.Dropbox({ fetch, accessToken: token$.value });
   dbx
     .filesUpload({
@@ -60,27 +75,50 @@ export function fileUpload(file, cb) {
       contents: file,
       autorename: true
     })
-    .then(_ => getFiles(cb))
+    .then(_ => {
+      if (path === path$.value) {
+        getFiles(cb);
+      }
+    })
     .catch(error => console.log(error));
 }
 
 export function search(cb, query) {
-  let dbx = new Dropbox.Dropbox({ fetch, accessToken: token$.value });
-  dbx.filesSearch({ path: "", query }).then(response => {
-    const result = [];
+  let path = window.location.pathname;
 
-    response.matches.map(element => result.push(element.metadata));
-    cb(result);
-  });
+  let dbx = new Dropbox.Dropbox({ fetch, accessToken: token$.value });
+  dbx
+    .filesSearch({ path: "", query })
+    .then(response => {
+      if (path === window.location.pathname) {
+        const result = [];
+
+        response.matches.map(element => result.push(element.metadata));
+        cb(result);
+      }
+    });
 }
 
 
-export function remove(path, cb) {
-  let dbx = new Dropbox.Dropbox({ fetch, accessToken: token$.value});
+export function remove(filepath, cb) {
+  let path = window.location.pathname;
+
+  let dbx = new Dropbox.Dropbox({ fetch, accessToken: token$.value });
   dbx
-    .filesDelete({ path })
-    .then(_ => getFiles(cb)
-    )
+    .filesDelete({ path: filepath })
+    .then(_ => {
+      if (path !== "/search" && path !== "/favorites") {
+        getFiles(cb);
+      }
+
+      let favorites = [...favorite$.value];
+      favorites.map((file, idx) => {
+        if (file.path_lower === filepath) {
+          favorites.splice(idx, 1);
+          updateFavorite(favorites);
+        }
+      });
+    })
     .catch(error => console.log(error));
 }
 
@@ -102,25 +140,42 @@ export function getThumbnail(cb, path) {
     });
 }
 
-export function submitRename(from_path, to_path, cb, errorMsg){    
+export function submitRename(from_path, to_path, cb, errorMsg) {
+  let path = window.location.pathname;
+
   let dbx = new Dropbox.Dropbox({ fetch, accessToken: token$.value });
 
   dbx
-  .filesMove({from_path, to_path})
-  .then(_ => getFiles(cb))
-  .catch(function(error) {
-    errorMsg(error)
-  })
+    .filesMove({ from_path, to_path })
+    .then(response => {
+      if (path !== "/search" && path !== "/favorites") {
+        getFiles(cb);
+      }
+
+      let favorites = [...favorite$.value];
+      favorites.map((file, idx) => {
+        if (file.id === response.id) {
+          favorites.splice(idx, 1, response);
+          updateFavorite(favorites);
+        }
+      });
+
+    })
+    .catch(function (error) {
+      errorMsg(error)
+    })
 }
 
 export function copyTarget(from_path, to_path, cb) {
-  console.log(from_path);
-  console.log(to_path);
+  let path = window.location.pathname;
+
   let dbx = new Dropbox.Dropbox({ fetch, accessToken: token$.value });
   dbx
-    .filesCopy({from_path, to_path, autorename: true})
+    .filesCopy({ from_path, to_path, autorename: true })
     .then(response => {
-      getFiles(cb)
+      if (path !== "/search" && path !== "/favorites") {
+        getFiles(cb);
+      }
     });
 }
 
@@ -134,12 +189,26 @@ export function download(path) {
     .catch(error => console.log(error));
 }
 
-export function move(from_path, to_path, cb){
+export function move(from_path, to_path, cb) {
+  let path = window.location.pathname;
+
   let dbx = new Dropbox.Dropbox({ fetch, accessToken: token$.value });
   dbx
-  .filesMove({from_path, to_path, autorename: true})
-  .then(_=> getFiles(cb))
-  .catch(error => console.log(error));
+    .filesMove({ from_path, to_path, autorename: true })
+    .then(response => {
+      if (path !== "/search" && path !== "/favorites") {
+        getFiles(cb);
+      }
+
+      let favorites = [...favorite$.value];
+      favorites.map((file, idx) => {
+        if (file.id === response.id) {
+          favorites.splice(idx, 1, response);
+          updateFavorite(favorites);
+        }
+      });
+    })
+    .catch(error => console.log(error));
 }
 
 export function parseQueryString(str) {
@@ -155,7 +224,7 @@ export function parseQueryString(str) {
     return ret;
   }
 
-  str.split("&").forEach(function(param) {
+  str.split("&").forEach(function (param) {
     var parts = param.replace(/\+/g, " ").split("=");
     // Firefox (pre 40) decodes `%3D` to `=`
     // https://github.com/sindresorhus/query-string/pull/37

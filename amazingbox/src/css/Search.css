@@ -1,8 +1,8 @@
 .search-bar {
   position: absolute;
+  max-width: 375px;
   top: 0;
   box-sizing: border-box;
-  width: fit-content;
   font-size: 16px;
   border-radius: 16px;
   border: 1px solid gray;
@@ -13,18 +13,26 @@
 }
 
 .search-bar__text-input {
-  width: 375px;
+  width: 300px;
   border: none;
   padding: 8px;
   margin-left: 16px;
   border-right: 1px solid gray;
   font-size: 15px;
   outline: none;
+  animation: opacity, slideIn .7s ease-in;
 }
 
-.search-bar__text-input:focus + .search-bar {
-  width: 100%;
+@keyframes slideIn {
+  from {width: 0;}
+  to {width: 300px;}
 }
+
+@keyframes opacity {
+  from {opacity: 0}
+  to {opacity: 1;}
+}
+
 
 .search-bar__clear-button {
   padding: 0;

@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import "../../css/itemMenu.css";
-import PopUp from "./popUp"
+import PopUp from "./PopUp"
 
 function ItemMenu(props) {            
     const [id, upDateId] = useState(''); //skickar med id:et för den knappen du tryckt på nere på rad 23ish

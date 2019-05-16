@@ -7,7 +7,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: no-repeat center center fixed;
-  background-image: url();
   background-size: cover;
   height: 100vh;
 }
@@ -155,6 +154,18 @@ code {
   width: 1000px;
   height: 50px;
   top: 176px;
+}
+
+.th-empty {
+  width: 20px;
+}
+
+.th-empty2 {
+
+}
+
+.th-empty3 {
+
 }
 
 .th-type,

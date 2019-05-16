@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {Link} from "react-router-dom";
 import { useDebounce } from "use-debounce";
-
-import { getFiles, search } from "../utils";
+import { search } from "../utils";
 import "../css/Search.css";
 
 function Search(props) {
@@ -12,6 +11,11 @@ function Search(props) {
 
   useEffect(() => {
     search(cb, value);
+    let interval = setInterval(()=>search(cb, value), 1000);
+    
+    return ()=>{
+      clearInterval(interval);
+    };
   }, [value]);
 
   function handleChange(event) {

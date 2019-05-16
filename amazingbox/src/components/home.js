@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Redirect, Link } from "react-router-dom";
-import ItemList from "./itemList";
-import Logout from "./Logout";
-import Search from "./Search";
+import { Redirect } from "react-router-dom";
+import ItemList from "./ItemList";
 import Path from "./Path";
-import AddFileButton from "./addFileAndFolder";
+import AddItem from "./AddItem";
 import { getFiles } from "../utils";
 import { updatePath } from "../store/path";
 import { token$ } from "../store/authToken";
@@ -24,11 +22,13 @@ function Home(props) {
 
     const path =
       props.location.pathname === "/" ? "" : props.location.pathname.slice(5);
-    updatePath(path);
+        updatePath(path);
 
     getFiles(callback);
-
+    let interval = setInterval(()=>getFiles(callback), 5000);
+    
     return () => {
+      clearInterval(interval);
       subscriptionToken.unsubscribe();
     };
   }, [props.location.pathname]); //vad useEffect håller koll på
@@ -39,16 +39,15 @@ function Home(props) {
 
   return (
     <>
-      <Link className="search-icon material-icons" to="/search">
-        search
-      </Link>
-      <Logout />
       <main>
         <Path />
         <ItemList files={files} cb={callback} />
-        <AddFileButton cb={callback} />
+        <AddItem cb={callback} />
       </main>
     </>
   );
+
+
+
 }
 export default Home;

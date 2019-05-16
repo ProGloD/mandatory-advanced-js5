@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 import { path$ } from "../store/path";
 import "../css/Path.css";
 
