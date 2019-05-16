@@ -24,8 +24,11 @@ const LoginDone = () => {
 
   return (
     <>
-      <p>Success!</p>
-      <span className="material-icons">check</span>
+      <img
+        src="https://www.mktv.mx/wp-content/uploads/2017/07/letter_sending.gif"
+        width={400}
+        alt="Dropbox Logo"
+      />
     </>
   );
 };

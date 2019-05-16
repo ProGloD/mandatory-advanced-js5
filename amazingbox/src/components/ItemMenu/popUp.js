@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import {remove, getAllFiles, move, submitRename, copyTarget} from "../../utils";
 import "./menuPopUp.css";
-import {path$} from "../../store/path";
 
 function PopUp(props) {
     const [name, updateName] = useState(props.file.name); 
@@ -40,7 +39,9 @@ function PopUp(props) {
                      <button onClick={closePop} className="popUp-content-btn">&times;</button>
                      <form onSubmit={(event) =>{
                         event.preventDefault();
-                        submitRename(file.path_lower, `${path$.value}/${name}`, cb, updateErrorMsg);
+                        let path = file.path_lower.split("/");
+                        path.pop();
+                        submitRename(file.path_lower, `${path.join("/")}/${name}`, cb, updateErrorMsg);
                         closePop();
                         }}
                          className="popUp-content-box">
@@ -93,7 +94,8 @@ function PopUp(props) {
                         <p>Are you sure you wanna copy this item?</p>
                          <form onSubmit={(event)=> {
                              event.preventDefault();
-                             copyTarget(file.path_lower, `${path$.value}/${file.name}`, cb)
+                             copyTarget(file.path_lower, file.path_lower, cb);
+                             closePop();
                             }}>
                             <span>
                                 <button className="copyButtons" type="submit">

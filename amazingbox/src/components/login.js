@@ -5,7 +5,6 @@ import { login } from "../utils";
 import { token$ } from "../store/authToken";
 import { Helmet } from "react-helmet";
 
-
 function Login() {
   if (token$.value) {
     return <Redirect to="/" />;

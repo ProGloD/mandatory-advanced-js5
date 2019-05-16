@@ -9,7 +9,6 @@ import { Redirect } from "react-router-dom";
 function Favorites(props) {    
   const [userToken, updateUserToken] = useState(token$.value);
   const [favorites, updateUserFavorite] = useState(favorite$.value);  
-  console.log(favorites);
 
   useEffect(() => { //här håller useEffect koll på våra filer. Den koller vilken sorts fil det är.
     let subscription = favorite$.subscribe(favorite => {

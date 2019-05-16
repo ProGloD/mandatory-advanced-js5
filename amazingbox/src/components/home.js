@@ -12,7 +12,6 @@ function Home(props) {
   const [files, updateFiles] = useState([]); //antingen måste vi skicka ner denna staten som prop eller store. Alla api-anrop behöver state
 
   function callback(files) {  //måste använda en callback för att uppdatera filerna. annars får vi fel pga updatefiles körs innan den fått en response från api:et
-    console.log(files);
     updateFiles(files);
   }
 
